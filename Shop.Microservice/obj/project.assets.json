@@ -474,11 +474,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Shop.Microservice\\Shop.Microservice.csproj",
+      "projectUniqueName": "F:\\OtusRoom5\\Shop.Microservice\\Shop.Microservice.csproj",
       "projectName": "Shop.Microservice",
-      "projectPath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Shop.Microservice\\Shop.Microservice.csproj",
+      "projectPath": "F:\\OtusRoom5\\Shop.Microservice\\Shop.Microservice.csproj",
       "packagesPath": "C:\\Users\\Yesen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Shop.Microservice\\obj\\",
+      "outputPath": "F:\\OtusRoom5\\Shop.Microservice\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yesen\\AppData\\Roaming\\NuGet\\NuGet.Config"

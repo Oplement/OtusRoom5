@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QftTR8kMjOIOF4cSprM2cb+V2AkCZQ2bZCpD2my1d64tsThb2FxOJqxFX3mCBYiltsy1gYyW7AzhN7Sdfjhidw==",
+  "dgSpecHash": "wPDLFi4RkWDuZCxLws2byE1oggpZ8h+JNX6zSme9wDxdvuNHgMBhE3Wdzj01nePl2P2Tsy7hnNrR1GKTx9z5ZA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Authorization.Microservice.Core\\Authorization.Microservice.Core.csproj",
+  "projectFilePath": "F:\\OtusRoom5\\Authorization.Microservice.Core\\Authorization.Microservice.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yesen\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
     "C:\\Users\\Yesen\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",

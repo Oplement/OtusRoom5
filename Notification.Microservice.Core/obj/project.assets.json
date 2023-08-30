@@ -474,11 +474,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Notification.Microservice.Core\\Notification.Microservice.Core.csproj",
+      "projectUniqueName": "F:\\OtusRoom5\\Notification.Microservice.Core\\Notification.Microservice.Core.csproj",
       "projectName": "Notification.Microservice.Core",
-      "projectPath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Notification.Microservice.Core\\Notification.Microservice.Core.csproj",
+      "projectPath": "F:\\OtusRoom5\\Notification.Microservice.Core\\Notification.Microservice.Core.csproj",
       "packagesPath": "C:\\Users\\Yesen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Notification.Microservice.Core\\obj\\",
+      "outputPath": "F:\\OtusRoom5\\Notification.Microservice.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yesen\\AppData\\Roaming\\NuGet\\NuGet.Config"

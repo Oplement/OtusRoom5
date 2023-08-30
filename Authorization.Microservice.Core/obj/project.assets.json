@@ -474,11 +474,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Authorization.Microservice.Core\\Authorization.Microservice.Core.csproj",
+      "projectUniqueName": "F:\\OtusRoom5\\Authorization.Microservice.Core\\Authorization.Microservice.Core.csproj",
       "projectName": "Authorization.Microservice.Core",
-      "projectPath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Authorization.Microservice.Core\\Authorization.Microservice.Core.csproj",
+      "projectPath": "F:\\OtusRoom5\\Authorization.Microservice.Core\\Authorization.Microservice.Core.csproj",
       "packagesPath": "C:\\Users\\Yesen\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yesen\\RiderProjects\\FiveRoomShop\\Authorization.Microservice.Core\\obj\\",
+      "outputPath": "F:\\OtusRoom5\\Authorization.Microservice.Core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yesen\\AppData\\Roaming\\NuGet\\NuGet.Config"
