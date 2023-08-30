@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Notification.Microservice.Core.props" />
+</Project>

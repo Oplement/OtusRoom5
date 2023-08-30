@@ -6,8 +6,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FiveRoomShop.Notification.M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FiveRoomShop.Shop.Microservice", "FiveRoomShop.Shop.Microservice", "{EADF7CB3-651C-4A1D-A6D5-279B3FB8419F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FiveRoomShop.WebUI", "FiveRoomShop.WebUI", "{BF3066BA-9CF1-4C47-B456-84537AD38784}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authorization.Microservice.Core", "Authorization.Microservice.Core\Authorization.Microservice.Core.csproj", "{88814A55-1DC3-4CA5-AC36-A011F6C78F67}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notification.Microservice.Core", "Notification.Microservice.Core\Notification.Microservice.Core.csproj", "{D1C15DB8-A2F4-4A49-AE24-E9BCAA09EC87}"
