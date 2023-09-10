@@ -10,4 +10,8 @@
       <Folder Include="Entities" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Authorization.Microservice.Domain\Authorization.Microservice.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
