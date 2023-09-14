@@ -71,7 +71,6 @@ builder.Services.AddCors(options =>
         builder => builder.AllowAnyMethod()
                           .AllowAnyHeader()
                           .SetIsOriginAllowed(_ => true)
-                          //.AllowAnyOrigin()
                           .AllowCredentials());
 });
 
@@ -95,40 +94,3 @@ app.UseEndpoints(endpoints =>
 });
 
 app.Run();
-
-
-public class RegisterModel
-{
-    public string Username { get; set; }
-    public string Email { get; set; }
-    public string Password { get; set; }
-    public string Role { get; set; }
-
-
-
-    public RegisterModel(string username, string email, string password, string role)
-    {
-        Username = username;
-        Email = email;
-        Password = password;
-        Role = role;
-    }
-}
-
-public class LoginModel
-{
-    public string Email { get; set; }
-    public string Password { get; set; }
-
-    public LoginModel(string email, string password)
-    {
-        Email = email;
-        Password = password;
-    }
-}
-
-public class Role
-{
-    public string Name { get; set; }
-    public Role(string name) => Name = name;
-}
