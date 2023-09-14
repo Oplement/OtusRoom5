@@ -13,7 +13,7 @@ using System.Text;
 using static Authorization.Microservice.Core.Controllers.AuthController;
 
 var builder = WebApplication.CreateBuilder();
-
+ 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();    
 builder.Services.AddSwaggerGen(c =>
