@@ -1,4 +1,4 @@
-﻿namespace Authorization.Microservice.Infrastructure
+﻿namespace Authorization.Microservice.Domain
 {
     public interface IEntity
     {

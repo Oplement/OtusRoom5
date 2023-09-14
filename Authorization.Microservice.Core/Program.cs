@@ -1,5 +1,5 @@
 using Authorization.Microservice.Core.JWTSettings;
-using Authorization.Microservice.Domain.Entities;
+using Authorization.Microservice.Domain;
 using Authorization.Microservice.Infrastructure;
 using Authorization.Microservice.Infrastructure.Repositories.Contracts;
 using Authorization.Microservice.Infrastructure.Repositories.Implementation;
