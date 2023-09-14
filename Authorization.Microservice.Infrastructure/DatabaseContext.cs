@@ -1,4 +1,4 @@
-﻿using Authorization.Microservice.Domain.Entities;
+﻿using Authorization.Microservice.Domain;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authorization.Microservice.Infrastructure

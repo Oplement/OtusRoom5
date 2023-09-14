@@ -1,16 +1,11 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Transactions;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Shop.Microservice.Domain.Common
 {
     public class Product
     {
         [Key]
-        public Guid Id { get; set; }  
+        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public int Count { get; set; }

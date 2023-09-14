@@ -5,17 +5,13 @@ using Authorization.Microservice.Infrastructure.Repositories.Contracts;
 using Authorization.Microservice.Infrastructure.Repositories.Implementation;
 using Authorization.Microservice.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
-using System.Text;
-using static Authorization.Microservice.Core.Controllers.AuthController;
 
 var builder = WebApplication.CreateBuilder();
- 
+
 builder.Services.AddControllers();
-builder.Services.AddAuthorization();    
+builder.Services.AddAuthorization();
 builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "You api title", Version = "v1" });

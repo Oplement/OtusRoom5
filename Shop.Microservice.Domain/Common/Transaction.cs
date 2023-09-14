@@ -1,10 +1,8 @@
 ﻿
 
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Transactions;
-using static System.Net.Mime.MediaTypeNames;
 using Authorization.Microservice.Domain;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Shop.Microservice.Domain.Common
 {
