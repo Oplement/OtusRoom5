@@ -1,4 +1,5 @@
-﻿using Authorization.Microservice.Infrastructure.Repositories.Contracts;
+﻿using Authorization.Microservice.Domain;
+using Authorization.Microservice.Infrastructure.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authorization.Microservice.Infrastructure.Repositories.Implementation
