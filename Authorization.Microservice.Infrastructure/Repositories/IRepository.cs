@@ -1,4 +1,4 @@
-﻿using Authorization.Microservice.Domain.Entities;
+﻿using Authorization.Microservice.Domain;
 
 namespace Authorization.Microservice.Infrastructure.Repositories.Contracts
 {

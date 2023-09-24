@@ -1,12 +1,10 @@
 ﻿using Authorization.Microservice.Core.JWTSettings;
-using Authorization.Microservice.Domain.Entities;
+using Authorization.Microservice.Domain;
 using Authorization.Microservice.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Authorization.Microservice.Core.Controllers
 {
@@ -72,7 +70,7 @@ namespace Authorization.Microservice.Core.Controllers
         [HttpGet("getUserInfo", Name = "getUserInfo")]
         public async Task<IActionResult> GetUserInfo()
         {
-            var name = User.Claims.FirstOrDefault(m=>m.Type == ClaimTypes.Name);
+            var name = User.Claims.FirstOrDefault(m => m.Type == ClaimTypes.Name);
             var role = User.Claims.FirstOrDefault(m => m.Type == ClaimTypes.Role);
 
             var response = new
@@ -90,7 +88,7 @@ namespace Authorization.Microservice.Core.Controllers
         /// </summary>
         /// <returns>JWT Токен</returns>
         [HttpPost("register", Name = "register")]
-        public async Task<IActionResult> GetUserInfo([FromBody] RegisterModel registerData)
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerData)
         {
             var person = await _service.GetByEmailAsync(registerData.Email);
 
@@ -112,8 +110,8 @@ namespace Authorization.Microservice.Core.Controllers
 
             return Ok(response);
         }
-       
+
     }
 
-    
+
 }

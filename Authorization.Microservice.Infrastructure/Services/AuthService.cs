@@ -1,6 +1,5 @@
-﻿using Authorization.Microservice.Domain.Entities;
+﻿using Authorization.Microservice.Domain;
 using Authorization.Microservice.Infrastructure.Repositories.Contracts;
-using System.Security.Claims;
 
 namespace Authorization.Microservice.Infrastructure.Services
 {
@@ -26,6 +25,6 @@ namespace Authorization.Microservice.Infrastructure.Services
             return await _repository.Create(user);
         }
 
-      
+
     }
 }

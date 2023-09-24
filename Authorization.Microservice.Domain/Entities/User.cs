@@ -1,5 +1,5 @@
-﻿namespace Authorization.Microservice.Infrastructure
-{ 
+﻿namespace Authorization.Microservice.Domain
+{
     public class User : IEntity
     {
         public Guid Id { get; set; }

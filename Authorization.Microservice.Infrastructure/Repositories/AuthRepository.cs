@@ -1,5 +1,4 @@
-﻿using Authorization.Microservice.Domain.Entities;
-using Authorization.Microservice.Infrastructure.Repositories.Contracts;
+﻿using Authorization.Microservice.Infrastructure.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
 namespace Authorization.Microservice.Infrastructure.Repositories.Implementation
@@ -27,7 +26,7 @@ namespace Authorization.Microservice.Infrastructure.Repositories.Implementation
 
         public void Dispose()
         {
-                Save();
+            Save();
         }
 
         public async Task<T> Get(Guid id)
