@@ -8,27 +8,31 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
     public class AuthRepository<T> : IRepository<T>
         where T : class
     {
-        DatabaseContext _databaseContext;
+        private readonly DatabaseContext _databaseContext;
         public AuthRepository(DatabaseContext context)
         {
-            _databaseContext = context;
+            _databaseContext = context ?? throw new ArgumentNullException(nameof(context));
         }
+
 
         public async Task<T> Create(T item)
         {
             await _databaseContext.AddAsync(item);
-
             return item;
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await _databaseContext.Set<T>().FindAsync(id);
+            if (entity != null)
+            {
+                _databaseContext.Set<T>().Remove(entity);
+            }
         }
 
         public void Dispose()
         {
-                Save();
+            Save().Wait();
         }
 
         public async Task<T> Get(Guid id)
@@ -49,6 +53,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         public async Task Update(T item)
         {
             _databaseContext.Set<T>().Update(item);
+            await Save();
         }
     }
 }
