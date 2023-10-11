@@ -1,4 +1,4 @@
-﻿//using Shop.Microservice.Domain.Entities;
+﻿using Shop.Microservice.Domain.Entities;
 using Shop.Microservice.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Shop.Microservice.Infrastructure.Repositories.Contracts;
@@ -34,11 +34,6 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         public async Task<T> Get(Guid id)
         {
             return await _databaseContext.Set<T>().FindAsync(id);
-        }
-        public async Task<User> Get(string email)
-        {
-            var res = await _databaseContext.Users.FirstOrDefaultAsync(m => m.Email == email);
-            return res;
         }
 
         public async Task<IEnumerable<T>> GetAll()

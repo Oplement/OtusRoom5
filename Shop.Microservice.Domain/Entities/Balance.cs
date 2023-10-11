@@ -6,8 +6,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Shop.Microservice.Domain.Common;
 
-namespace Shop.Microservice.Domain.Common
+namespace Shop.Microservice.Domain.Entities
 {
     public class Balance : BaseAuditableEntity
     {

@@ -3,15 +3,19 @@ using System.ComponentModel.DataAnnotations;
 using System.Transactions;
 using static System.Net.Mime.MediaTypeNames;
 using Authorization.Microservice.Domain.Entities;
+using Shop.Microservice.Domain.Common;
 
-namespace Shop.Microservice.Domain.Common;
-
-public class Transaction : BaseEntity
+namespace Shop.Microservice.Domain.Entities
 {
-    public Guid SenderID { get; set; }
-    public long Amount { get; set; }
-    public string Comment { get; set; }
-    public DateTime TimeStamp { get; set; }
-    public TransactionStatus TransactionStatus { get; set; }
+    public class Transaction : BaseEntity
+    {
+        public Guid SenderID { get; set; }
+        public long Amount { get; set; }
+        public string Comment { get; set; }
+        public DateTime TimeStamp { get; set; }
+        public TransactionStatus TransactionStatus { get; set; }
+    }
+
 }
+
 

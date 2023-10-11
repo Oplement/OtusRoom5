@@ -1,6 +1,5 @@
-﻿//using Shop.Microservice.Domain.Entities;
+﻿using Shop.Microservice.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Shop.Microservice.Domain.Common;
 
 namespace Shop.Microservice.Infrastructure
 {
