@@ -1,8 +1,8 @@
-﻿using Authorization.Microservice.Domain.Entities;
+﻿using Authorization.Microservice.Domain;
 
 namespace Authorization.Microservice.Infrastructure.Repositories.Contracts
 {
-    public interface IRepository<T> : IDisposable
+    public interface IRepository<T>
         where T : class
     {
         Task<IEnumerable<T>> GetAll();

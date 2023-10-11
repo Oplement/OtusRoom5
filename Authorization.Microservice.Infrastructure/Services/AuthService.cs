@@ -1,6 +1,8 @@
-﻿using Authorization.Microservice.Domain.Entities;
+﻿using Authorization.Microservice.Domain;
 using Authorization.Microservice.Infrastructure.Repositories.Contracts;
-using System.Security.Claims;
+using System.Runtime.ExceptionServices;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Authorization.Microservice.Infrastructure.Services
 {
@@ -26,6 +28,14 @@ namespace Authorization.Microservice.Infrastructure.Services
             return await _repository.Create(user);
         }
 
-      
+        public async Task<string> Hash(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                var hash = BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+                return hash;
+            }
+        }
     }
 }

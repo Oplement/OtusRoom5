@@ -1,4 +1,4 @@
-﻿using Authorization.Microservice.Domain.Entities;
+﻿using Authorization.Microservice.Domain;
 using Authorization.Microservice.Infrastructure.Repositories.Contracts;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,14 +20,12 @@ namespace Authorization.Microservice.Infrastructure.Repositories.Implementation
             return item;
         }
 
-        public Task Delete(Guid id)
+        public async Task Delete(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var user = await _databaseContext.Set<T>().FindAsync(id);
+            if (user == null) return;
 
-        public void Dispose()
-        {
-                Save();
+            _databaseContext.Set<T>().Remove(user);
         }
 
         public async Task<T> Get(Guid id)

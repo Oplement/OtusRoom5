@@ -1,12 +1,10 @@
 ﻿using Authorization.Microservice.Core.JWTSettings;
-using Authorization.Microservice.Domain.Entities;
+using Authorization.Microservice.Domain;
 using Authorization.Microservice.Infrastructure.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 
 namespace Authorization.Microservice.Core.Controllers
 {
@@ -49,7 +47,9 @@ namespace Authorization.Microservice.Core.Controllers
 
             if (person is null) return BadRequest("Пользователь с таким Email не найден");
 
-            if (person.Password != loginData.Password) return Unauthorized("Неверный логин или пароль");
+            var hash = await _service.Hash(loginData.Password);
+
+            if (person.PasswordHash != hash) return Unauthorized("Неверный логин или пароль");
 
             var jwt = AuthOptions.GenerateToken(person);
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -72,7 +72,7 @@ namespace Authorization.Microservice.Core.Controllers
         [HttpGet("getUserInfo", Name = "getUserInfo")]
         public async Task<IActionResult> GetUserInfo()
         {
-            var name = User.Claims.FirstOrDefault(m=>m.Type == ClaimTypes.Name);
+            var name = User.Claims.FirstOrDefault(m => m.Type == ClaimTypes.Name);
             var role = User.Claims.FirstOrDefault(m => m.Type == ClaimTypes.Role);
 
             var response = new
@@ -90,13 +90,14 @@ namespace Authorization.Microservice.Core.Controllers
         /// </summary>
         /// <returns>JWT Токен</returns>
         [HttpPost("register", Name = "register")]
-        public async Task<IActionResult> GetUserInfo([FromBody] RegisterModel registerData)
-        {
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerData)
+        { 
             var person = await _service.GetByEmailAsync(registerData.Email);
 
             if (person != null) return BadRequest("Пользователь с таким Email уже существует");
 
-            person = new User() { Email = registerData.Email, Password = registerData.Password, Username = registerData.Username, Role = "user" };
+            var hash = await _service.Hash(registerData.Password);
+            person = new User() { Email = registerData.Email, PasswordHash = hash, Username = registerData.Username, Role = "user" };
 
             await _service.CreateAsync(person);
 
@@ -112,8 +113,8 @@ namespace Authorization.Microservice.Core.Controllers
 
             return Ok(response);
         }
-       
+
     }
 
-    
+
 }

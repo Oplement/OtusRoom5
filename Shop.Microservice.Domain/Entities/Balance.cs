@@ -1,12 +1,10 @@
-﻿using Authorization.Microservice.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
+using Authorization.Microservice.Domain;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shop.Microservice.Domain.Common;
+
 
 namespace Shop.Microservice.Domain.Entities
 {
