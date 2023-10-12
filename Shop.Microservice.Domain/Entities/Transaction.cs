@@ -1,8 +1,5 @@
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+using Shop.Microservice.Domain.Common;
 using System.Transactions;
-using static System.Net.Mime.MediaTypeNames;
-
 
 namespace Shop.Microservice.Domain.Entities
 {

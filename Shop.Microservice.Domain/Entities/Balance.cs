@@ -1,12 +1,4 @@
-using Authorization.Microservice.Domain;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Microservice.Domain.Common;
-
-
-namespace Shop.Microservice.Domain.Entities
+namespace Shop.Microservice.Domain.Common
 {
     public class Balance : BaseAuditableEntity
     {
