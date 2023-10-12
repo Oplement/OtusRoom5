@@ -9,10 +9,10 @@ namespace Shop.Microservice.Domain.Common
     {
         [Display(Name = "Выдан")]
         Issued,
-        
+
         [Display(Name = "Отменен")]
         Canceled,
-        
+
         [Display(Name = "В работе")]
         InProgress
     }

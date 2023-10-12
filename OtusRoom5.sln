@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorization.Microservice.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authorization.Microservice.Infrastructure", "Authorization.Microservice.Infrastructure\Authorization.Microservice.Infrastructure.csproj", "{C26B57AF-5F09-4B21-9603-A02BD67B66C4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Microservice.Infrastructure", "Shop.Microservice.Infrastructure\Shop.Microservice.Infrastructure.csproj", "{7F3B0B1C-2382-459B-AEBD-4FBC0F81AB05}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Microservice.Infrastructure", "Shop.Microservice.Infrastructure\Shop.Microservice.Infrastructure.csproj", "{7F3B0B1C-2382-459B-AEBD-4FBC0F81AB05}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
