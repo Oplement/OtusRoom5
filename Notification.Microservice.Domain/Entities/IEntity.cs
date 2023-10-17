@@ -1,10 +1,9 @@
-﻿namespace Notification.Microservice.Domain
+﻿namespace Notification.Microservice.Domain.Entities;
+
+public interface IEntity
 {
-    public interface IEntity
-    {
-        /// <summary>
-        /// Идентификатор.
-        /// </summary>
-        Guid Id { get; set; }
-    }
+    /// <summary>
+    /// Идентификатор.
+    /// </summary>
+    Guid Id { get; set; }
 }
