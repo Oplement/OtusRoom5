@@ -1,0 +1,27 @@
+﻿<style>
+    .menu-section {
+        margin-left:15%;
+    }
+    .menu{
+        margin-top:30px;
+        font-size:15px;
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div style="display:flex" class="menu">
+        <div class="menu-section"><a href="/mainpage">Домой</a></div>
+        <div class="menu-section">Текущий баланс: @ViewData["balance"] <br /> Для отправки: @ViewData["forSend"]</div>
+        <div class="menu-section"><a href="#">Корзина</a> <br /> <a href="#">Мои заказы</a></div>
+        <div class="menu-section">*photo* <br /> @ViewData["username"]</div>
+    </div>
+  
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

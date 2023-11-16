@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Microservice.D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notification.Microservice.Infrastructure", "Notification.Microservice.Infrastructure\Notification.Microservice.Infrastructure.csproj", "{95181A92-DB94-4834-89FB-6E6A4D70EABF}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ClientApp", "ClientApp", "{32AB9B37-7EA1-47EC-B2CD-59031C94134D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientApp", "ClientApp\ClientApp.csproj", "{DB24A688-0E7D-4C38-845E-F0F1A67F2D9F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,10 @@ Global
 		{95181A92-DB94-4834-89FB-6E6A4D70EABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95181A92-DB94-4834-89FB-6E6A4D70EABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95181A92-DB94-4834-89FB-6E6A4D70EABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB24A688-0E7D-4C38-845E-F0F1A67F2D9F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB24A688-0E7D-4C38-845E-F0F1A67F2D9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB24A688-0E7D-4C38-845E-F0F1A67F2D9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB24A688-0E7D-4C38-845E-F0F1A67F2D9F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -83,6 +91,7 @@ Global
 		{7F3B0B1C-2382-459B-AEBD-4FBC0F81AB05} = {1C0C6929-755E-4134-8F0E-7C0DA90BD29B}
 		{50F5FAC6-F614-4F26-B109-C44450786468} = {B4A1FD84-7134-4D35-BBB4-7C4C197D9790}
 		{95181A92-DB94-4834-89FB-6E6A4D70EABF} = {B4A1FD84-7134-4D35-BBB4-7C4C197D9790}
+		{DB24A688-0E7D-4C38-845E-F0F1A67F2D9F} = {32AB9B37-7EA1-47EC-B2CD-59031C94134D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B74DF4CB-DAF8-465D-B50D-94CDAFFEF1E5}
