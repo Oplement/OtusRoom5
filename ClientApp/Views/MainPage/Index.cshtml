@@ -1,0 +1,52 @@
+﻿@model List<Shop.Microservice.Domain.Common.Product>
+
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .products-list{
+        background-color: #ACC8FF;
+        width:90%;
+        height:80%;
+        margin: 30px auto;
+        display:flex;
+    }
+    .product {
+        margin-left:30px;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+   
+</style>
+
+<div class="products-list">
+    @{
+        foreach (var product in Model)
+        {
+            <div class="product">
+                <div>
+                <img src="@product.Image" width="50" height="50"/>
+                </div>
+                <div>
+                    @product.Title
+                </div>
+                <div>
+                    @product.Description
+                </div>
+                <div>
+                    @product.Count
+                </div>
+                <div>
+                    @product.Price
+                </div>
+                <div>
+                  <a href="#">+</a>
+                </div>
+
+
+            </div>
+        }
+    }
+
+</div>
