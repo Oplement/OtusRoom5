@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Authorization.Microservice.Domain\Authorization.Microservice.Domain.csproj" />
-    <ProjectReference Include="..\Notification.Microservice.Domain\Notification.Microservice.Domain.csproj" />
     <ProjectReference Include="..\Shop.Microservice.Domain\Shop.Microservice.Domain.csproj" />
   </ItemGroup>
 

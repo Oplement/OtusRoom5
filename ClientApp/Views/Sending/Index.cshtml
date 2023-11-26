@@ -1,0 +1,59 @@
+﻿@page
+@model TransactionModel
+
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transaction Page</title>
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .balance-info { /* Styles for the balance display */
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+        }
+
+        input, textarea {
+            width: 100%;
+        }
+
+        .comment-box {
+            height: 100px;
+        }
+        /* Additional CSS to match your design */
+    </style>
+</head>
+
+    <form method="post">
+        <div class="form-group">
+            <label for="recipient">Кому:</label>
+            <input type="text" id="recipient" name="Recipient">
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Сколько:</label>
+            <input type="number" id="amount" name="Amount">
+        </div>
+
+        <div class="form-group">
+            <label for="comments">Комментарий:</label>
+            <textarea id="comments" name="Comments" class="comment-box"></textarea>
+        </div>
+
+        <button type="submit">Отправить</button>
+    </form>
+</html>
