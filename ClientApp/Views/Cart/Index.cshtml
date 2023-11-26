@@ -1,0 +1,68 @@
+﻿@model List<Shop.Microservice.Domain.Common.Product>
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .cart-list {
+        background-color: #E7EEF6;
+        width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .cart-item img {
+            width: 100px; /* Adjust as needed */
+            height: 100px; /* Adjust as needed */
+            margin-right: 10px;
+        }
+
+    .cart-item-details {
+        flex-grow: 1;
+    }
+
+    .cart-item-price {
+        font-weight: bold;
+    }
+
+    .remove-item {
+        cursor: pointer;
+        color: #888;
+        margin-left: 20px;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="cart-list">
+    <!-- Здесь будут элементы из корзины -->
+    <div class="cart-item">
+        <img src="link-to-product-image" alt="Product Image">
+        <div class="cart-item-details">
+            <div>Title of good</div>
+            <div class="cart-item-price">Price: 6754</div>
+        </div>
+        <div class="remove-item">&#128465;</div>
+    </div>
+    <!-- Повторите структуру выше для каждого элемента в корзине -->
+</div>
+
+<div>
+    <button class="checkout-btn">Оформить заказ</button>
+</div>
