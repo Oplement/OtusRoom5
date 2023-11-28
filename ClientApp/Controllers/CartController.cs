@@ -9,5 +9,11 @@ namespace ClientApp.Controllers
         {
             return View();
         }
+        [HttpPut("Put")]
+        public IActionResult Put()
+        {
+
+            return View();
+        }
     }
 }
