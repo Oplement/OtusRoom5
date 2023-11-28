@@ -21,6 +21,7 @@ namespace ClientApp.Controllers
             ViewData["balance"] = 10;
             ViewData["forSend"] = 20;
             ViewData["username"] = "Andrey Glazev";
+            ViewData["userphoto"] = "http://protalismany.ru/wp-content/uploads/2018/11/na-foto-s-ulibkoi.jpg";
 
             var products = new List<Product>();
 
@@ -35,10 +36,19 @@ namespace ClientApp.Controllers
             //}
 
 
-            // затычка
+            // тестовые данные
             products = new List<Product>() { 
-            new Product() { Count = 1, Description = "hi", Id = new Guid(), Price = 233, Title = "COK", Image = "https://tourpedia.ru/wp-content/uploads/2019/04/”ака-Ћарга.jpg"},
-            new Product(){ Count=5, Title = " ќ‘“ј", Price = 2300, Description = "dfff", Id = new Guid(), Image="https://img.theculturetrip.com/1024x/wp-content/uploads/2018/02/1115609435_3dd77d8474_b.jpg" } };
+            new Product() { Count = 2, Description = "–азмеры S,M,L", Id = new Guid(), Price = 5999, Title = "’уди", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
+            new Product(){ Count=5, Title = "ѕоверЅанк", Price = 2399, Description = "10000мјч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+             new Product() { Count = 2, Description = "–азмеры S,M,L", Id = new Guid(), Price = 5999, Title = "’уди", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
+            new Product(){ Count=5, Title = "ѕоверЅанк", Price = 2399, Description = "10000мјч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+             new Product() { Count = 2, Description = "–азмеры S,M,L", Id = new Guid(), Price = 5999, Title = "’уди", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
+            new Product(){ Count=5, Title = "ѕоверЅанк", Price = 2399, Description = "10000мјч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+            new Product() { Count = 2, Description = "–азмеры S,M,L", Id = new Guid(), Price = 5999, Title = "’уди", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
+            new Product(){ Count=5, Title = "ѕоверЅанк", Price = 2399, Description = "10000мјч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+             new Product() { Count = 2, Description = "–азмеры S,M,L", Id = new Guid(), Price = 5999, Title = "’уди", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
+            new Product(){ Count=5, Title = "ѕоверЅанк", Price = 2399, Description = "10000мјч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+            };
             
             
             return View(products);

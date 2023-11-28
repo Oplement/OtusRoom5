@@ -20,5 +20,11 @@ namespace ClientApp.Controllers
 
             return View(cartProducts);
         }
+        [HttpPut("Put")]
+        public IActionResult Put()
+        {
+
+            return View();
+        }
     }
 }
