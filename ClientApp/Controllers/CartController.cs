@@ -18,11 +18,17 @@ namespace ClientApp.Controllers
         new Product { Id = Guid.NewGuid(), Title = "Товар 5", Description = "Описание товара 5", Price = 500, Image = "image-url-5" }
     };
 
+            ViewData["balance"] = 10;
+            ViewData["forSend"] = 20;
+            ViewData["username"] = "Andrey Glazev";
+            ViewData["userphoto"] = "http://protalismany.ru/wp-content/uploads/2018/11/na-foto-s-ulibkoi.jpg";
+
             return View(cartProducts);
         }
         [HttpPut("Put")]
         public IActionResult Put()
         {
+
 
             return View();
         }
