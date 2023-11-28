@@ -69,40 +69,31 @@
     <button class="checkout-btn">Оформить заказ</button>
 </div>
 
-<div id="pagination">
-    <button onclick="showPage(1)">1</button>
-    <button onclick="showPage(2)">2</button>
-</div>
+<div id="pagination"></div>
 
 <script>
-    // Тестовые данные для демонстрации
-    const products = [
-        { Title: "Товар 1", Price: 6754, Image: "link-to-product-image-1" },
-        { Title: "Товар 2", Price: 6800, Image: "link-to-product-image-2" },
-        { Title: "Товар 3", Price: 6900, Image: "link-to-product-image-3" },
-        { Title: "Товар 4", Price: 7000, Image: "link-to-product-image-4" },
-        { Title: "Товар 5", Price: 7100, Image: "link-to-product-image-5" }
-    ];
+
+    const products = JSON.parse('@Html.Raw(Json.Serialize(Model))');
 
     let currentPage = 1;
     const itemsPerPage = 3;
     const totalPages = Math.ceil(products.length / itemsPerPage);
-
+    console.log(totalPages);
+    console.log(products);
     function showPage(page) {
         currentPage = page;
         const cartList = document.getElementById('cart-list');
-        cartList.innerHTML = ''; // Очистить текущее содержимое
+        cartList.innerHTML = '';
 
-        // Добавить элементы для текущей страницы
         products
             .slice((page - 1) * itemsPerPage, page * itemsPerPage)
             .forEach(product => {
                 cartList.innerHTML += `
                         <div class="cart-item">
-                            <img src="${product.Image}" alt="Product Image">
+                            <img src="${product.image}" alt="Product Image">
                             <div class="cart-item-details">
-                                <div>${product.Title}</div>
-                                <div class="cart-item-price">Price: ${product.Price}</div>
+                                <div>${product.title}</div>
+                                <div class="cart-item-price">Price: ${product.price}</div>
                             </div>
                             <div class="remove-item">&#128465;</div>
                         </div>
