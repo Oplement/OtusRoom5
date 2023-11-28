@@ -42,7 +42,7 @@
         width: 100%;
         text-align: center;
         padding: 10px;
-        background-color: #4CAF50;
+        background-color: rgba(217, 217, 217, 1); /* Обновленный цвет фона */
         color: white;
         border: none;
         border-radius: 5px;
@@ -50,19 +50,74 @@
     }
 </style>
 
-<div class="cart-list">
-    <!-- Здесь будут элементы из корзины -->
-    <div class="cart-item">
-        <img src="link-to-product-image" alt="Product Image">
-        <div class="cart-item-details">
-            <div>Title of good</div>
-            <div class="cart-item-price">Price: 6754</div>
+<div class="cart-list" id="cart-list">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var product = Model[i];
+        <div class="cart-item" data-page="@((i / 3) + 1)">
+            <img src="@product.Image" alt="Product Image">
+            <div class="cart-item-details">
+                <div>@product.Title</div>
+                <div class="cart-item-price">Price: @product.Price</div>
+            </div>
+            <div class="remove-item">&#128465;</div>
         </div>
-        <div class="remove-item">&#128465;</div>
-    </div>
-    <!-- Повторите структуру выше для каждого элемента в корзине -->
+    }
 </div>
 
 <div>
     <button class="checkout-btn">Оформить заказ</button>
 </div>
+
+<div id="pagination">
+    <button onclick="showPage(1)">1</button>
+    <button onclick="showPage(2)">2</button>
+</div>
+
+<script>
+    // Тестовые данные для демонстрации
+    const products = [
+        { Title: "Товар 1", Price: 6754, Image: "link-to-product-image-1" },
+        { Title: "Товар 2", Price: 6800, Image: "link-to-product-image-2" },
+        { Title: "Товар 3", Price: 6900, Image: "link-to-product-image-3" },
+        { Title: "Товар 4", Price: 7000, Image: "link-to-product-image-4" },
+        { Title: "Товар 5", Price: 7100, Image: "link-to-product-image-5" }
+    ];
+
+    let currentPage = 1;
+    const itemsPerPage = 3;
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+
+    function showPage(page) {
+        currentPage = page;
+        const cartList = document.getElementById('cart-list');
+        cartList.innerHTML = ''; // Очистить текущее содержимое
+
+        // Добавить элементы для текущей страницы
+        products
+            .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+            .forEach(product => {
+                cartList.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${product.Image}" alt="Product Image">
+                            <div class="cart-item-details">
+                                <div>${product.Title}</div>
+                                <div class="cart-item-price">Price: ${product.Price}</div>
+                            </div>
+                            <div class="remove-item">&#128465;</div>
+                        </div>
+                    `;
+            });
+    }
+
+    function setupPagination() {
+        const paginationDiv = document.getElementById('pagination');
+        for (let i = 1; i <= totalPages; i++) {
+            paginationDiv.innerHTML += `<button onclick="showPage(${i})">${i}</button>`;
+        }
+    }
+
+    // Инициализация страницы и пагинации
+    setupPagination();
+    showPage(currentPage);
+</script>
