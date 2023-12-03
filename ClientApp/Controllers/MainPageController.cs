@@ -15,6 +15,14 @@ namespace ClientApp.Controllers
             _requestService = requestService;
         }
 
+        [Route("{id}")]
+        [HttpGet]
+        public IActionResult GetOne(string id)
+        {
+
+            return View();
+        }
+
         [HttpGet]
         public IActionResult Index()
         {
