@@ -6,7 +6,7 @@
         {
             {"Shop","http://localhost:14675" },
             {"Notification","http://localhost:43368" },
-            {"Authorization","http://localhost:10807" },
+            {"Authorization","http://localhost:5107" },
         };
 
         public static string GetMicroserviceAdress(string name)

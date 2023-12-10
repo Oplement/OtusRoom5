@@ -35,7 +35,7 @@
        
         <div class="menu-section" style="background-color:#9DEC81; width:250px;text-align:center">
             <div class="text">
-                Текущий баланс: @ViewData["balance"] <br /> Для отправки: @ViewData["forSend"]
+                Текущий баланс: @this.Context.Items["balance"] <br /> Для отправки: @this.Context.Items["forSend"]
 
             </div>
         <br/>
@@ -63,13 +63,19 @@
             
         </div>
         <div class="menu-section">
-            <img src="@ViewData["userphoto"]" style="width:70px; height:70px;border-radius: 100%;" />
+            <img src="@this.Context.Items["userphoto"]" style="width:70px; height:70px;border-radius: 100%;" />
             <br />
             <div style="margin-left:5%">
-                @ViewData["username"]
+                @this.Context.Items["username"]
+               @* @ViewData["username"]*@
             </div>
+            <form action="/auth/logout">
+                <button type="submit">
+                    <img src="~/content/icons/logout.svg" style="width:20px;height:38px" alt="buttonpng" />
+                </button>
+            </form>
         </div>
-     
+       
         
     </div>
   
