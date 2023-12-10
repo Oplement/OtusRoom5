@@ -9,20 +9,26 @@ namespace ClientApp.Controllers
         public IActionResult Index()
         {
             // Тестовый список продуктов.
-            List<Product> cartProducts = new List<Product>
-    {
-        new Product { Id = Guid.NewGuid(), Title = "Товар 1", Description = "Описание товара 1", Price = 100, Image = "image-url-1" },
-        new Product { Id = Guid.NewGuid(), Title = "Товар 2", Description = "Описание товара 2", Price = 200, Image = "image-url-2" },
-        new Product { Id = Guid.NewGuid(), Title = "Товар 3", Description = "Описание товара 3", Price = 300, Image = "image-url-3" },
-        new Product { Id = Guid.NewGuid(), Title = "Товар 4", Description = "Описание товара 4", Price = 400, Image = "image-url-4" },
-        new Product { Id = Guid.NewGuid(), Title = "Товар 5", Description = "Описание товара 5", Price = 500, Image = "image-url-5" }
-    };
+            var cartProducts = new List<Product>() {
+            new Product() { Count = 2, Description = "Размеры S,M,L", Id = new Guid(), Price = 5999, Title = "Худи", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
+            new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+                        new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+            new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+            new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+
+            };
+
+            ViewData["balance"] = 10;
+            ViewData["forSend"] = 20;
+            ViewData["username"] = "Andrey Glazev";
+            ViewData["userphoto"] = "http://protalismany.ru/wp-content/uploads/2018/11/na-foto-s-ulibkoi.jpg";
 
             return View(cartProducts);
         }
         [HttpPut("Put")]
         public IActionResult Put()
         {
+
 
             return View();
         }

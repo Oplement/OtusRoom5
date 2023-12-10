@@ -5,48 +5,42 @@
     Layout = "_Layout";
 }
 
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transaction Page</title>
     <style>
-        /* Add your CSS styles here */
-        body {
-            font-family: Arial, sans-serif;
-        }
+    
 
-        .balance-info { /* Styles for the balance display */
-        }
-
-        .form-group {
+      /*   .form-group {
             margin-bottom: 15px;
+        } */
+        .input1, textarea {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
         }
 
-        label {
-            display: block;
-        }
-
-        input, textarea {
-            width: 100%;
-        }
-
-        .comment-box {
+       /*  .comment-box {
             height: 100px;
-        }
-        /* Additional CSS to match your design */
-    </style>
-</head>
+        } */
 
-    <form method="post">
+        .form{
+
+        background-color: #E7EEF6;
+        width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+        border-radius: 8px;
+        }
+    </style>
+
+    <form method="post" class="form">
         <div class="form-group">
             <label for="recipient">Кому:</label>
-            <input type="text" id="recipient" name="Recipient">
+            <input type="text" id="recipient" name="Recipient" class="input1">
         </div>
 
         <div class="form-group">
             <label for="amount">Сколько:</label>
-            <input type="number" id="amount" name="Amount">
+        <input type="number" id="amount" name="Amount" class="input1">
         </div>
 
         <div class="form-group">
@@ -56,4 +50,4 @@
 
         <button type="submit">Отправить</button>
     </form>
-</html>
+
