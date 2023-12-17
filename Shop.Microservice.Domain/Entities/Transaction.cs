@@ -1,9 +1,9 @@
-using Shop.Microservice.Domain.Common;
+
 using System.Transactions;
 
-namespace Shop.Microservice.Domain.Entities
+namespace Shop.Microservice.Domain.Common
 {
-    public class Transaction : BaseEntity
+    public class Transaction : BaseAuditableEntity
     {
         public Guid SenderID { get; set; }
         public long Amount { get; set; }
