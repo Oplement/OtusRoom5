@@ -11,7 +11,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Contracts
         Task<T> Create(T item);
         Task Update(T item);
         Task Delete(Guid id);
-
+        
         Task Save();
     }
 }

@@ -5,11 +5,11 @@ using Shop.Microservice.Infrastructure.Repositories.Contracts;
 
 namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 {
-    public class AuthRepository<T> : IRepository<T>
+    public class GenericRepository<T> : IRepository<T>
         where T : class
     {
         private readonly DatabaseContext _databaseContext;
-        public AuthRepository(DatabaseContext context)
+        public GenericRepository(DatabaseContext context)
         {
             _databaseContext = context ?? throw new ArgumentNullException(nameof(context));
         }
