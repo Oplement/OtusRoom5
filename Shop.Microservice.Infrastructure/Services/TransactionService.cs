@@ -1,10 +1,10 @@
-﻿using Shop.Microservice.Infrastructure.Repositories.Contracts;
+﻿using Shop.Microservice.Domain.Common;
+using Shop.Microservice.Infrastructure.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
 
 namespace Shop.Microservice.Infrastructure.Services
 {

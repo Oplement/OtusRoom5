@@ -32,21 +32,21 @@ namespace Shop.Microservice.Core.Controllers
             return Ok(transaction);
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody] Transaction transaction)
-        //{
-        //    var createdTransaction = await _transactionService.CreateTransactionAsync(transaction);
-        //    return CreatedAtAction(nameof(Get), new { id = createdTransaction.Id }, createdTransaction);
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Transaction transaction)
+        {
+            var createdTransaction = await _transactionService.CreateTransactionAsync(transaction);
+            return CreatedAtAction(nameof(Get), new { id = createdTransaction.Id }, createdTransaction);
+        }
 
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> Put(Guid id, [FromBody] Transaction transaction)
-        //{
-        //    if (id != transaction.Id) return BadRequest();
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Put(Guid id, [FromBody] Transaction transaction)
+        {
+            if (id != transaction.Id) return BadRequest();
 
-        //    await _transactionService.UpdateTransactionAsync(transaction);
-        //    return NoContent();
-        //}
+            await _transactionService.UpdateTransactionAsync(transaction);
+            return NoContent();
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
