@@ -1,0 +1,17 @@
+﻿<div class="main-login-form">
+
+
+	<label style="color:darkred" >@ViewData["error"]</label>
+	<br />
+	<br />
+	<form action="/auth/login" method="post">
+		<label for="Username">Username</label>
+		<input type="email" name="email" class="email" placeholder="Enter your username" required>
+
+		<label for="Password">Password</label>
+		<input type="password" name="password" class="password" placeholder="Enter your password" required>
+
+		<input name="submit" type="submit" value="Submit">
+	</form>
+
+</div>

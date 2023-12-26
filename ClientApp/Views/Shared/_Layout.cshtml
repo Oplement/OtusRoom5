@@ -1,0 +1,86 @@
+﻿<style>
+    .menu-section {
+        margin-left:19%;
+        font-size:20px;
+        border-radius: 8px;
+    }
+    .menu{
+        flex-wrap:wrap;
+        margin-top:30px;
+        font-size:15px;
+        border-radius: 8px;
+    }
+    .text {
+        margin-top:10px;
+    }
+    a{
+        text-decoration:none;
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+</head>
+<body>
+    <div style="display:flex" class="menu">
+        <div style="margin-left:70px; border-radius: 8px;">
+            <form action="/mainpage">
+                <button type="submit">
+                    <img src="~/content/icons/house.svg" style="width:70px;height:98px" alt="buttonpng"/>
+                </button>
+            </form>
+        </div>
+     
+       
+        <div class="menu-section" style="background-color:#9DEC81; width:250px;text-align:center">
+            <div class="text">
+                Текущий баланс: @this.Context.Items["balance"] <br /> Для отправки: @this.Context.Items["forSend"]
+
+            </div>
+        <br/>
+
+            <div>
+                <form  action="/Sending" method="get">
+                    <input  type="submit" value="Отправить" />
+                </form>
+            </div>
+        </div>
+        <div style="font-size:18px;margin-left:150px">
+            <div style="background-color:lightgray; width:200px; height:50px;text-align:center;border-radius: 8px;">
+                <div style="padding-top:12px">
+                    <a class="text" href="/Cart">Корзина</a>
+                </div>
+                </div>
+             
+            <br /> 
+            <div style="background-color:lightgray; width:200px; height:50px;text-align:center;border-radius: 8px;">
+                <div style="padding-top:12px">
+                    <a href="#" class="text">Мои заказы</a>
+                </div>
+               
+            </div>
+            
+        </div>
+        <div class="menu-section">
+            <img src="@this.Context.Items["userphoto"]" style="width:70px; height:70px;border-radius: 100%;" />
+            <br />
+            <div style="margin-left:5%">
+                @this.Context.Items["username"]
+               @* @ViewData["username"]*@
+            </div>
+            <form action="/auth/logout">
+                <button type="submit">
+                    <img src="~/content/icons/logout.svg" style="width:20px;height:38px" alt="buttonpng" />
+                </button>
+            </form>
+        </div>
+       
+        
+    </div>
+  
+    <div>
+        @RenderBody()
+    </div>
+</body>
+</html>

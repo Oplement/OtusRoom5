@@ -1,0 +1,76 @@
+﻿@model List<Shop.Microservice.Domain.Common.Product>
+
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .products-list{
+        background-color: #ACC8FF;
+        width:90%;
+        height:80%;
+        margin: 30px auto;
+        display:flex;
+        flex-wrap : wrap;
+        border-radius: 8px;
+    }
+    .product {
+        margin-left:9%;
+        margin-top: 10px;
+        margin-right: 10px;
+        border-radius: 8px;
+    }
+
+    .img{
+        border-radius: 8px;
+    }
+   
+</style>
+
+<div class="products-list">
+    @{
+        int counter = 0;
+
+        foreach (var product in Model)
+        {
+            if(counter == 5)
+            {
+                <br/>
+            }
+            <div class="product">
+                <div>
+
+                <a href="/mainpage/@product.Id">
+                     <img src="@product.Image" width="100" height="100"/>
+                </a>
+               
+                </div>
+                <br/>
+                <div style="font-size:20px">
+                    <strong>@product.Title</strong>
+                </div>
+                <br/>
+                <div style="font-size:15px">
+                    @product.Description
+                </div>
+                <div style="font-size:15px">
+                    В наличии: @product.Count
+                </div style="font-size:15px">
+                <div>
+                    Стоимость: @product.Price
+                </div>
+                <div>
+                <br/>
+                  <button type="submit">
+                        <img src="https://baden-shop.ru/images/basket.png" style="width:40px;height:40px" alt="buttonpng" border="0" />
+                  </button>
+                </div>
+
+
+            </div>
+
+            counter++;
+        }
+    }
+
+</div>

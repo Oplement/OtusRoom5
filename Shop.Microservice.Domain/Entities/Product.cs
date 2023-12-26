@@ -1,11 +1,4 @@
-﻿
-
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Transactions;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace Shop.Microservice.Domain.Common
+﻿namespace Shop.Microservice.Domain.Common
 {
     public class Product : BaseEntity
     {

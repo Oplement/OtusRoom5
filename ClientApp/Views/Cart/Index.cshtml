@@ -1,0 +1,114 @@
+﻿@model List<Shop.Microservice.Domain.Common.Product>
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .cart-list {
+        background-color: #E7EEF6;
+        width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+        border-radius: 8px;
+    }
+
+    .cart-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .cart-item img {
+            width: 100px; /* Adjust as needed */
+            height: 100px; /* Adjust as needed */
+            margin-right: 10px;
+        }
+
+    .cart-item-details {
+        flex-grow: 1;
+    }
+
+    .cart-item-price {
+        font-weight: bold;
+    }
+
+    .remove-item {
+        cursor: pointer;
+        color: #888;
+        margin-left: 20px;
+    }
+
+    .checkout-btn {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        background-color: rgba(217, 217, 217, 1); /* Обновленный цвет фона */
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+<div class="cart-list" id="cart-list">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var product = Model[i];
+        <div class="cart-item" data-page="@((i / 3) + 1)">
+            <img src="@product.Image" alt="Product Image">
+            <div class="cart-item-details">
+                <div>@product.Title</div>
+                <div class="cart-item-price">Price: @product.Price</div>
+            </div>
+            <div class="remove-item">&#128465;</div>
+        </div>
+    }
+</div>
+
+<div>
+    <button class="checkout-btn">Оформить заказ</button>
+</div>
+
+<div id="pagination"></div>
+
+<script>
+
+    const products = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+
+    let currentPage = 1;
+    const itemsPerPage = 3;
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+    console.log(totalPages);
+    console.log(products);
+    function showPage(page) {
+        currentPage = page;
+        const cartList = document.getElementById('cart-list');
+        cartList.innerHTML = '';
+
+        products
+            .slice((page - 1) * itemsPerPage, page * itemsPerPage)
+            .forEach(product => {
+                cartList.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${product.image}" alt="Product Image">
+                            <div class="cart-item-details">
+                                <div>${product.title}</div>
+                                <div class="cart-item-price">Price: ${product.price}</div>
+                            </div>
+                            <div class="remove-item">&#128465;</div>
+                        </div>
+                    `;
+            });
+    }
+
+    function setupPagination() {
+        const paginationDiv = document.getElementById('pagination');
+        for (let i = 1; i <= totalPages; i++) {
+            paginationDiv.innerHTML += `<button onclick="showPage(${i})">${i}</button>`;
+        }
+    }
+
+    // Инициализация страницы и пагинации
+    setupPagination();
+    showPage(currentPage);
+</script>

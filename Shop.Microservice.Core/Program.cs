@@ -1,9 +1,18 @@
+using Shop.Microservice.Infrastructure;
+using Shop.Microservice.Infrastructure.Repositories.Contracts;
+using Shop.Microservice.Infrastructure.Repositories.Implementation;
+using Shop.Microservice.Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDbContext<DatabaseContext>(); // Используйте AddDbContext, если DatabaseContext требует параметров в конструкторе
+builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<ProductService>();
+builder.Services.AddTransient<OrderService>();
+builder.Services.AddTransient<BalanceService>();
+builder.Services.AddTransient<TransactionService>();
 builder.Services.AddControllersWithViews();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -17,9 +26,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

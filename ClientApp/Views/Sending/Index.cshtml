@@ -1,0 +1,53 @@
+﻿@page
+@model TransactionModel
+
+@{
+    Layout = "_Layout";
+}
+
+    <style>
+    
+
+      /*   .form-group {
+            margin-bottom: 15px;
+        } */
+        .input1, textarea {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        }
+
+       /*  .comment-box {
+            height: 100px;
+        } */
+
+        .form{
+
+        background-color: #E7EEF6;
+        width: 90%;
+        margin: 30px auto;
+        padding: 15px;
+        border-radius: 8px;
+        }
+    </style>
+
+    <form method="post" class="form">
+        <div class="form-group">
+            <label for="recipient">Кому:</label>
+            <input type="text" id="recipient" name="Recipient" class="input1">
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Сколько:</label>
+        <input type="number" id="amount" name="Amount" class="input1">
+        </div>
+
+        <div class="form-group">
+            <label for="comments">Комментарий:</label>
+            <textarea id="comments" name="Comments" class="comment-box"></textarea>
+        </div>
+
+        <button type="submit">Отправить</button>
+    </form>
+
