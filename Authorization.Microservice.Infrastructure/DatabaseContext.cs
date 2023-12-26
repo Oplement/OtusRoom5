@@ -13,6 +13,19 @@ namespace Authorization.Microservice.Infrastructure
             //Database.EnsureCreated();
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = Guid.NewGuid(),
+                Email = "a@mail.ru",
+                ImagePath = "/content/avatars/35a44d12-42f9-4254-a7d3-2e3bf26c934c.jpg",
+                Role = "user",
+                Username = "Andrey Glazev",
+                PasswordHash = "473287f8298dba7163a897908958f7c0eae733e25d2e027992ea2edc9bed2fa8"
+            });
+        }
+
         public override ValueTask DisposeAsync()
         {
             SaveChanges();
