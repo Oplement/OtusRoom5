@@ -17,7 +17,7 @@ namespace Authorization.Microservice.Infrastructure
         {
             modelBuilder.Entity<User>().HasData(new User
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e"),
                 Email = "a@mail.ru",
                 ImagePath = "/content/avatars/35a44d12-42f9-4254-a7d3-2e3bf26c934c.jpg",
                 Role = "user",
