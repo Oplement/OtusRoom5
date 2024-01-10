@@ -31,7 +31,13 @@ namespace Shop.Microservice.Core.Controllers
             if (order == null) return NotFound();
             return Ok(order);
         }
-
+        [HttpGet("{user}")]
+        public async Task<IActionResult> GetCart(string user)
+        {
+            var order = await _orderService.GetOrderByIdAsync(id);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Order order)
         {

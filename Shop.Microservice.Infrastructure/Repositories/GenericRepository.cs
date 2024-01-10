@@ -39,6 +39,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             return await _databaseContext.Set<T>().FindAsync(id);
         }
+      
 
         public async Task<IEnumerable<T>> GetAll()
         {

@@ -27,6 +27,11 @@ namespace Shop.Microservice.Infrastructure.Services
             return await _repository.Get(id);
         }
 
+        public async Task<Order> GetCart(string username)
+        {
+            return await _repository.Get(id);
+        }
+
         public async Task<Order> CreateOrderAsync(Order order)
         {
             return await _repository.Create(order);
