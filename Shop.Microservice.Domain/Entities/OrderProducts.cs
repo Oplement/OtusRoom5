@@ -16,5 +16,7 @@ namespace Shop.Microservice.Domain.Entities
 
         public Product Product { get; set; }
         public Guid ProductId { get; set; }
+
+        public int Count { get; set; }
     }
 }

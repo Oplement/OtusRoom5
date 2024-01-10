@@ -29,7 +29,7 @@ namespace ClientApp.Controllers
         public IActionResult Index()
         {
             string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-            ResponseModel response_get_all_products = _requestService.SendGet(service , "/api/getallproducts", this.HttpContext);
+            ResponseModel response_get_all_products = _requestService.SendGet(service , "api/products", this.HttpContext);
 
             var products = new List<Product>();
 

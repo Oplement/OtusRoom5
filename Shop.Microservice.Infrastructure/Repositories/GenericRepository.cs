@@ -39,9 +39,25 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             return await _databaseContext.Set<T>().FindAsync(id);
         }
-        public async Task<T> GetCart(string userid)
+        public async Task<List<OrderProduct>> GetCart(Guid userid)
         {
-            return await _databaseContext.Orders.FirstOrDefault(m=>m.UserId == Guid.Parse(userid) && m.OrderStatus == OrderStatus.InCart)
+            var order = _databaseContext.Orders.FirstOrDefault(m => m.UserId == userid && m.OrderStatus == OrderStatus.InCart);
+            var id = new Guid();
+            if(order  == null)
+            {
+                var data = new Order() { CreateAt = DateTime.UtcNow, OrderStatus = OrderStatus.InCart, UserId = userid };
+                _databaseContext.Orders.Add(data);
+                _databaseContext.SaveChanges();
+                id = data.Id;
+            }
+            else
+            {
+                id = order.Id;
+            }
+
+            var cart = _databaseContext.OrderProducts.Where(m => m.OrderId == id).ToList();
+            
+            return cart;
         }
 
         public async Task<IEnumerable<T>> GetAll()
@@ -59,5 +75,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             _databaseContext.Set<T>().Update(item);
             await Save();
         }
+
+  
     }
 }

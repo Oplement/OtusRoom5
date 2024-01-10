@@ -10,7 +10,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Contracts
         Task<T> Get(Guid id);
         Task<T> Create(T item);
         Task Update(T item);
-        Task<T> GetCart(string userid);
+        Task<List<OrderProduct>> GetCart(Guid userid);
         Task Delete(Guid id);
         
         Task Save();

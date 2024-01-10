@@ -17,7 +17,7 @@ namespace ClientApp.Controllers
         {
             string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
 
-            ResponseModel response = _requestService.SendGet(service, $"/api/orders?userid={HttpContext.Items["userid"]}", this.HttpContext);
+            ResponseModel response = _requestService.SendGet(service, $"api/orders/cart?userid={HttpContext.Items["userid"]}", this.HttpContext);
 
             var cartOrder = new List<Product>();
 
