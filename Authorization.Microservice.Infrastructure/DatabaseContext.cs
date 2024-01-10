@@ -15,6 +15,8 @@ namespace Authorization.Microservice.Infrastructure
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            // ПАРОЛЬ - string
             modelBuilder.Entity<User>().HasData(new User
             {
                 Id = Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e"),
