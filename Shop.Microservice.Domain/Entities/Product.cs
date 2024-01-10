@@ -1,7 +1,11 @@
-﻿namespace Shop.Microservice.Domain.Common
+﻿using Shop.Microservice.Domain.Entities;
+
+namespace Shop.Microservice.Domain.Common
 {
-    public class Product : BaseEntity
+    public class Product : IEntity
     {
+        public Guid Id { get; set; }
+
         public string Title { get; set; }
         public string Description { get; set; }
         public int Count { get; set; }
