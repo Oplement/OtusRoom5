@@ -39,7 +39,10 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             return await _databaseContext.Set<T>().FindAsync(id);
         }
-      
+        public async Task<T> GetCart(string userid)
+        {
+            return await _databaseContext.Orders.FirstOrDefault(m=>m.UserId == Guid.Parse(userid) && m.OrderStatus == OrderStatus.InCart)
+        }
 
         public async Task<IEnumerable<T>> GetAll()
         {

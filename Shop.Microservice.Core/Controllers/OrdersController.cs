@@ -31,10 +31,10 @@ namespace Shop.Microservice.Core.Controllers
             if (order == null) return NotFound();
             return Ok(order);
         }
-        [HttpGet("{user}")]
-        public async Task<IActionResult> GetCart(string user)
+        [HttpGet("{userid}")]
+        public async Task<IActionResult> GetCart(string userid)
         {
-            var order = await _orderService.GetOrderByIdAsync(id);
+            var order = await _orderService.GetCart(userid);
             if (order == null) return NotFound();
             return Ok(order);
         }
