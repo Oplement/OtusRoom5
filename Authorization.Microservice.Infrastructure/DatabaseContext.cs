@@ -13,6 +13,11 @@ namespace Authorization.Microservice.Infrastructure
             //Database.EnsureCreated();
 
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            User user = new User() { Email ="admin@mail.ru", Role = "admin", Username = "admin", PasswordHash = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918" };
+            modelBuilder.Entity<User>().HasData(user);
+        }
         public override ValueTask DisposeAsync()
         {
             SaveChanges();
