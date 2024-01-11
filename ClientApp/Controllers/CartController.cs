@@ -57,5 +57,20 @@ namespace ClientApp.Controllers
 
             return Redirect("/mainpage");
         }
+
+        [HttpPost("RemoveOrderProduct")]
+        public IActionResult RemoveOrderProduct([FromQuery] string orderid, [FromQuery] string productid)
+        {
+            if (orderid == null)
+            {
+                return Redirect("/mainpage");
+            }
+
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            _requestService.SendPost(service, $"api/orders/removeorderproduct", new { orderid = orderid, productid = productid }, this.HttpContext);
+
+            return Redirect("/cart");
+        }
     }
 }

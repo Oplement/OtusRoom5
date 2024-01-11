@@ -39,6 +39,10 @@ namespace Shop.Microservice.Infrastructure.Services
         {
             await _repository.OrderCart(orderid);
         }
+        public async Task RemoveOrderProduct(Guid orderid, Guid productid)
+        {
+            await _repository.RemoveOrderProduct(orderid, productid);
+        }
 
         public async Task<Order> CreateOrderAsync(Order order)
         {

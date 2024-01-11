@@ -13,6 +13,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Contracts
         Task OrderCart(Guid orderid);
         Task<List<OrderProduct>> GetCart(Guid userid);
         Task<List<OrderProduct>> PutToCart(Guid userid, Guid productid);
+        Task RemoveOrderProduct(Guid orderid, Guid productid);
         Task Delete(Guid id);
         
         Task Save();

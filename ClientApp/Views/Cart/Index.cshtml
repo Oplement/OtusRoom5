@@ -3,7 +3,7 @@
 @{
     Layout = "_Layout";
 }
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <style>
     .cart-list {
         background-color: #E7EEF6;
@@ -71,7 +71,9 @@
                 }
                 <div class="cart-item-price">Price: @price</div>
             </div>
-            <div class="remove-item">&#128465;</div>
+         
+                <button type="button" onclick="remove('@orderProduct.OrderId','@orderProduct.ProductId')" class="remove-item">&#128465;</button>
+            
         </div>
     }
     <a><b>Общая стоимость: @finalprice</b> </a>
@@ -83,7 +85,19 @@
 </div>
 </form>
 <div id="pagination"></div>
-
+<script>
+    function remove(a,b){
+        $.ajax({
+            url: '/RemoveOrderProduct?orderid=' + a + '&productid=' + b,
+            method: 'post',
+            dataType: 'html',
+            data: { text: 'Текст' },
+            success: function (data) {
+                location.reload();
+            }
+        });
+    }
+</script>
 @*<script>
 
     const products = JSON.parse('@Html.Raw(Json.Serialize(Model))');

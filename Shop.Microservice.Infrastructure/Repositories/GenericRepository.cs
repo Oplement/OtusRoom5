@@ -107,5 +107,13 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             order.OrderStatus = OrderStatus.InProgress;
             await _databaseContext.SaveChangesAsync();
         }
+
+        public async Task RemoveOrderProduct(Guid orderid, Guid productid)
+        {
+            var orderProduct = _databaseContext.OrderProducts.FirstOrDefault(m => m.OrderId == orderid && m.ProductId == productid);
+            _databaseContext.OrderProducts.Remove(orderProduct);
+
+            await _databaseContext.SaveChangesAsync();
+        }
     }
 }

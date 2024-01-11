@@ -41,7 +41,7 @@ namespace Shop.Microservice.Core.Controllers
             return Ok(order);
         }
         [HttpPost("cart")]
-        public async Task<IActionResult> PutToCart([FromBody] CartModel model)
+        public async Task<IActionResult> PutToCart([FromBody] UserCartModel model)
         {
             var order = await _orderService.PutToCart(model.Userid, model.Productid);
             if (order == null) return NotFound();
@@ -53,6 +53,14 @@ namespace Shop.Microservice.Core.Controllers
         {
            await _orderService.OrderCart(Guid.Parse(orderid));
             
+            return Ok();
+        }
+
+        [HttpPost("removeorderproduct")]
+        public async Task<IActionResult> OrderCart([FromBody] OrderCartModel orderproduct)
+        {
+            await _orderService.RemoveOrderProduct(orderproduct.OrderId, orderproduct.Productid);
+
             return Ok();
         }
         [HttpPost]

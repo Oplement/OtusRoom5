@@ -1,11 +1,11 @@
 ﻿namespace Shop.Microservice.Core.Models
 {
-    public class CartModel
+    public class UserCartModel
     {
         public Guid Userid { get; set; }
         public Guid Productid { get; set; }
 
-        public CartModel(Guid userid, Guid productid)
+        public UserCartModel(Guid userid, Guid productid)
         {
             Userid = userid;
             Productid = productid;
