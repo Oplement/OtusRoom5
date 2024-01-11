@@ -39,11 +39,11 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             return await _databaseContext.Set<T>().FindAsync(id);
         }
-        public async Task<List<OrderProduct>> GetCart(Guid userid)
+        public async Task<Guid> GetCartOrderByUserId(Guid userid)
         {
             var order = _databaseContext.Orders.FirstOrDefault(m => m.UserId == userid && m.OrderStatus == OrderStatus.InCart);
             var id = new Guid();
-            if(order  == null)
+            if (order == null)
             {
                 var data = new Order() { CreateAt = DateTime.UtcNow, OrderStatus = OrderStatus.InCart, UserId = userid };
                 _databaseContext.Orders.Add(data);
@@ -55,7 +55,13 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
                 id = order.Id;
             }
 
-            var cart = _databaseContext.OrderProducts.Where(m => m.OrderId == id).ToList();
+            return id;
+        }
+        public async Task<List<OrderProduct>> GetCart(Guid userid)
+        {
+
+            var id = await GetCartOrderByUserId(userid);
+            var cart = _databaseContext.OrderProducts.Include(m=>m.Product).Where(m => m.OrderId == id).ToList();
             
             return cart;
         }
@@ -76,6 +82,23 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             await Save();
         }
 
-  
+        public async Task<List<OrderProduct>> PutToCart(Guid userid, Guid productid)
+        {
+            var id = await GetCartOrderByUserId(userid);
+
+            var prod = _databaseContext.OrderProducts.FirstOrDefault(m => m.OrderId == id && m.ProductId == productid);
+            if(prod != null)
+            {
+                prod.Count++;
+            }
+            else
+            {
+                _databaseContext.OrderProducts.Add(new OrderProduct() { OrderId = id, Count = 1, ProductId = productid });
+            }
+
+            _databaseContext.SaveChanges();
+
+            return _databaseContext.OrderProducts.Where(m => m.Id == id).ToList();
+        }
     }
 }

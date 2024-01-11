@@ -11,6 +11,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Contracts
         Task<T> Create(T item);
         Task Update(T item);
         Task<List<OrderProduct>> GetCart(Guid userid);
+        Task<List<OrderProduct>> PutToCart(Guid userid, Guid productid);
         Task Delete(Guid id);
         
         Task Save();

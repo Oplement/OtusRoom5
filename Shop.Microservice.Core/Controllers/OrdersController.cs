@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Microservice.Core.Models;
 using Shop.Microservice.Domain.Entities;
 using Shop.Microservice.Infrastructure.Services;
 
@@ -35,6 +36,14 @@ namespace Shop.Microservice.Core.Controllers
         public async Task<IActionResult> GetCart([FromQuery]Guid userid)
         {
             var order = await _orderService.GetCart(userid);
+            if (order == null) return NotFound();
+
+            return Ok(order);
+        }
+        [HttpPost("cart")]
+        public async Task<IActionResult> PutToCart([FromBody] CartModel model)
+        {
+            var order = await _orderService.PutToCart(model.Userid, model.Productid);
             if (order == null) return NotFound();
             return Ok(order);
         }
