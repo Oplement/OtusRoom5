@@ -38,14 +38,22 @@ namespace ClientApp.Controllers
 
             string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
 
-            ResponseModel response = _requestService.SendPost(service, $"api/orders/cart", new { userid = HttpContext.Items["userid"], productid = productid} , this.HttpContext);
+            _requestService.SendPost(service, $"api/orders/cart", new { userid = HttpContext.Items["userid"], productid = productid} , this.HttpContext);
 
-            var cartOrder = new List<Product>();
+            return Redirect("/mainpage");
+        }
 
-            if (response.success)
+        [HttpPost("OrderCart")]
+        public IActionResult OrderCart([FromForm] string orderid)
+        {
+            if(orderid == null)
             {
-                cartOrder = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(response.result.ToString());
+                return Redirect("/mainpage");
             }
+
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            _requestService.SendPost(service, $"api/orders/ordercart", orderid, this.HttpContext);
 
             return Redirect("/mainpage");
         }

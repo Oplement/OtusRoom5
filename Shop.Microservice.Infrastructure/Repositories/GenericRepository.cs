@@ -100,5 +100,12 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             return _databaseContext.OrderProducts.Where(m => m.Id == id).ToList();
         }
+
+        public async Task OrderCart(Guid orderid)
+        {
+            var order = _databaseContext.Orders.FirstOrDefault(m => m.Id == orderid);
+            order.OrderStatus = OrderStatus.InProgress;
+            await _databaseContext.SaveChangesAsync();
+        }
     }
 }

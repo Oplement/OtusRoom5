@@ -35,6 +35,10 @@ namespace Shop.Microservice.Infrastructure.Services
         {
             return await _repository.PutToCart(userid, productid);
         }
+        public async Task OrderCart(Guid orderid)
+        {
+            await _repository.OrderCart(orderid);
+        }
 
         public async Task<Order> CreateOrderAsync(Order order)
         {

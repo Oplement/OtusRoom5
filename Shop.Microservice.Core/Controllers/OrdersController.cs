@@ -47,6 +47,14 @@ namespace Shop.Microservice.Core.Controllers
             if (order == null) return NotFound();
             return Ok(order);
         }
+
+        [HttpPost("ordercart")]
+        public async Task<IActionResult> OrderCart([FromBody] string orderid)
+        {
+           await _orderService.OrderCart(Guid.Parse(orderid));
+            
+            return Ok();
+        }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Order order)
         {

@@ -44,13 +44,19 @@
         text-align: center;
         padding: 10px;
         background-color: rgba(217, 217, 217, 1); /* Обновленный цвет фона */
-        color: white;
+        color: black;
         border: none;
         border-radius: 5px;
         cursor: pointer;
     }
 </style>
+@{
+    var finalprice = 0;
+}
 
+<form method="post" action="/ordercart">
+
+<input hidden="hidden" name="orderid" class="orderid" value="@Model.FirstOrDefault()?.OrderId"/>
 <div class="cart-list" id="cart-list">
     @for (int i = 0; i < Model.Count; i++)
     {
@@ -60,17 +66,22 @@
             <div class="cart-item-details">
                 <div>@orderProduct.Product.Title</div>
                 <div>@orderProduct.Count шт.</div>
-                <div class="cart-item-price">Price: @orderProduct.Product.Price</div>
+                @{
+                    var price = orderProduct.Product.Price * orderProduct.Count; finalprice += price;
+                }
+                <div class="cart-item-price">Price: @price</div>
             </div>
             <div class="remove-item">&#128465;</div>
         </div>
     }
+    <a><b>Общая стоимость: @finalprice</b> </a>
 </div>
 
 <div>
-    <button class="checkout-btn">Оформить заказ</button>
+  
+    <button type="submit" class="checkout-btn">Оформить заказ</button>
 </div>
-
+</form>
 <div id="pagination"></div>
 
 @*<script>
