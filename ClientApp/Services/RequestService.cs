@@ -31,7 +31,7 @@ namespace ClientApp.Services
                 string json = "";
                 byte[] byteArray;
              
-                json = JsonSerializer.Serialize(body);
+                json = Newtonsoft.Json.JsonConvert.SerializeObject(body);
                 byteArray = Encoding.UTF8.GetBytes(json);
                 request.ContentLength = byteArray.Length;
 

@@ -2,8 +2,6 @@
 using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Infrastructure.Services;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace Shop.Microservice.Core.Controllers
 {
     [ApiController]

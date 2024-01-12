@@ -27,6 +27,23 @@ namespace Shop.Microservice.Infrastructure.Services
             return await _repository.Get(id);
         }
 
+        public async Task<List<OrderProduct>> GetCart(Guid userid)
+        {
+            return await _repository.GetCart(userid);
+        }
+        public async Task<List<OrderProduct>> PutToCart(Guid userid, Guid productid)
+        {
+            return await _repository.PutToCart(userid, productid);
+        }
+        public async Task OrderCart(Guid orderid)
+        {
+            await _repository.OrderCart(orderid);
+        }
+        public async Task RemoveOrderProduct(Guid orderid, Guid productid)
+        {
+            await _repository.RemoveOrderProduct(orderid, productid);
+        }
+
         public async Task<Order> CreateOrderAsync(Order order)
         {
             return await _repository.Create(order);

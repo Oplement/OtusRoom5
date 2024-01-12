@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Microservice.Core.Models;
 using Shop.Microservice.Domain.Entities;
 using Shop.Microservice.Infrastructure.Services;
 
@@ -31,7 +32,37 @@ namespace Shop.Microservice.Core.Controllers
             if (order == null) return NotFound();
             return Ok(order);
         }
+        [HttpGet("cart")]
+        public async Task<IActionResult> GetCart([FromQuery]Guid userid)
+        {
+            var order = await _orderService.GetCart(userid);
+            if (order == null) return NotFound();
 
+            return Ok(order);
+        }
+        [HttpPost("cart")]
+        public async Task<IActionResult> PutToCart([FromBody] UserCartModel model)
+        {
+            var order = await _orderService.PutToCart(model.Userid, model.Productid);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
+
+        [HttpPost("ordercart")]
+        public async Task<IActionResult> OrderCart([FromBody] string orderid)
+        {
+           await _orderService.OrderCart(Guid.Parse(orderid));
+            
+            return Ok();
+        }
+
+        [HttpPost("removeorderproduct")]
+        public async Task<IActionResult> OrderCart([FromBody] OrderCartModel orderproduct)
+        {
+            await _orderService.RemoveOrderProduct(orderproduct.OrderId, orderproduct.Productid);
+
+            return Ok();
+        }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Order order)
         {

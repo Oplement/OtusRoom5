@@ -78,6 +78,8 @@ namespace Authorization.Microservice.Core.Controllers
             var user = _service.GetByEmailAsync(email.Value.ToString()).Result;
             var response = new
             {
+
+                id = user?.Id,
                 userphoto = user?.ImagePath,
                 username = username.Value,
                 role = role.Value,

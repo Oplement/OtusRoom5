@@ -1,36 +1,76 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClientApp.Models;
+using ClientApp.Services;
+using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Shop.Microservice.Domain.Common;
+using Shop.Microservice.Domain.Entities;
 
 namespace ClientApp.Controllers
 {
     public class CartController : Controller
     {
+        RequestService _requestService;
+        public CartController(RequestService requestService)
+        {
+            _requestService = requestService;
+        }
         [HttpGet("Cart")]
         public IActionResult Index()
         {
-            // Тестовый список продуктов.
-            var cartProducts = new List<Product>() {
-            new Product() { Count = 2, Description = "Размеры S,M,L", Id = new Guid(), Price = 5999, Title = "Худи", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
-            new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
-                        new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
-            new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
-            new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id = new Guid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
 
-            };
+            ResponseModel response = _requestService.SendGet(service, $"api/orders/cart?userid={HttpContext.Items["userid"]}", this.HttpContext);
 
-            ViewData["balance"] = 10;
-            ViewData["forSend"] = 20;
-            ViewData["username"] = "Andrey Glazev";
-            ViewData["userphoto"] = "http://protalismany.ru/wp-content/uploads/2018/11/na-foto-s-ulibkoi.jpg";
+            var cartOrder = new List<OrderProduct>();
 
-            return View(cartProducts);
+            if (response.success)
+            {
+                cartOrder = Newtonsoft.Json.JsonConvert.DeserializeObject<List<OrderProduct>>(response.result.ToString());
+            }
+
+            return View(cartOrder);
         }
-        [HttpPut("Put")]
-        public IActionResult Put()
+        [HttpPost("Cart")]
+        public IActionResult Put([FromForm] Guid productid)
         {
 
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
 
-            return View();
+            _requestService.SendPost(service, $"api/orders/cart", new { userid = HttpContext.Items["userid"], productid = productid} , this.HttpContext);
+
+            return Redirect("/mainpage");
+        }
+
+        [HttpPost("OrderCart")]
+        public IActionResult OrderCart([FromForm] string orderid)
+        {
+            if(orderid == null)
+            {
+                return Redirect("/mainpage");
+            }
+
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            _requestService.SendPost(service, $"api/orders/ordercart", orderid, this.HttpContext);
+
+            return Redirect("/mainpage");
+        }
+
+        [HttpPost("RemoveOrderProduct")]
+        public IActionResult RemoveOrderProduct([FromQuery] string orderid, [FromQuery] string productid)
+        {
+            if (orderid == null)
+            {
+                return Redirect("/mainpage");
+            }
+
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            _requestService.SendPost(service, $"api/orders/removeorderproduct", new { orderid = orderid, productid = productid }, this.HttpContext);
+
+            return Redirect("/cart");
         }
     }
 }

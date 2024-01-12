@@ -38,6 +38,8 @@
                 <br/>
             }
             <div class="product">
+            <form method="post" action="/cart">
+            <input hidden="hidden" name="productid" class="productid" value="@product.Id"/>
                 <div>
 
                 <a href="/mainpage/@product.Id">
@@ -61,12 +63,15 @@
                 </div>
                 <div>
                 <br/>
+                
                   <button type="submit">
                         <img src="https://baden-shop.ru/images/basket.png" style="width:40px;height:40px" alt="buttonpng" border="0" />
                   </button>
+              
+               
                 </div>
 
-
+                  </form>
             </div>
 
             counter++;

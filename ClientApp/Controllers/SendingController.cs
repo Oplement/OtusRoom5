@@ -9,11 +9,6 @@ namespace ClientApp.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-
-            ViewData["balance"] = 10;
-            ViewData["forSend"] = 20;
-            ViewData["username"] = "Andrey Glazev";
-            ViewData["userphoto"] = "http://protalismany.ru/wp-content/uploads/2018/11/na-foto-s-ulibkoi.jpg";
             return View();
         }
     }
