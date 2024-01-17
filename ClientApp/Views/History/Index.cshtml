@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+
+<style>
+    .history_container{
+        background-color: #ACC8FF;
+        width: contain;
+        height: contain;
+        position:relative;
+        padding: 10px;
+        margin: 30px;
+    }
+    .order{
+        
+    }
+    .summary_orders{
+        font-size: 1.5em;
+    }
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        font-size: 1.5em;
+    }
+</style>
+
+
+<div class="history_container">
+    <div class="order">
+        <details>
+            <summary class="summary_orders">
+                Заказ № 1234324532
+            </summary>
+            <div class="item">
+                <p><a href="ссылка на товар"><img src="~/content/icons/logout.svg" alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                <div class="title_item">Название товара</div>
+                <div class="price">Price: 5.434</div>
+                <div class="status">Статус: Выдан</div>
+            </div>
+            <div class="item">
+                <p><a href="ссылка на товар"><img src="~/content/icons/logout.svg" alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                <div class="title_item">Название товара</div>
+                <div class="price">Price: 5.434</div>
+                <div class="status">Статус: Отменен</div>
+            </div>
+        </details>
+    </div>
+    <div class="order">
+        <details>
+            <summary class="summary_orders">
+                Заказ № 1234324532
+            </summary>
+            <div class="item">
+                <p><a href="ссылка на товар"><img src="~/content/icons/logout.svg" alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                <div class="title_item">Название товара</div>
+                <div class="price">Price: 5.434</div>
+                <div class="status">Статус: Выдан</div>
+            </div>
+        </details>
+    </div>
+</div> 
+
+
