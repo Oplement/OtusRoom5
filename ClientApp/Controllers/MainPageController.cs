@@ -40,5 +40,30 @@ namespace ClientApp.Controllers
 
             return View(products);
         }
+
+        [HttpPost("patch", Name = "patch")]
+        public IActionResult Patch()
+        {
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+            ResponseModel response_get_all_products = _requestService.SendGet(service, "api/products", this.HttpContext);
+
+            var products = new List<Product>();
+
+            if (response_get_all_products.success)
+            {
+                products = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(response_get_all_products.result.ToString());
+            }
+
+            return View(products);
+        }
+
+        [HttpPost("delete", Name ="delete")]
+        public IActionResult Delete([FromForm] Guid id)
+        {
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+            ResponseModel response_get_all_products = _requestService.SendPost(service, $"api/products/delete", new { productid = id }, this.HttpContext);
+
+            return RedirectToAction("Index");
+        }
     }
 }

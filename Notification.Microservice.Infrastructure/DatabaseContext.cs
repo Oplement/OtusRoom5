@@ -14,7 +14,7 @@ namespace Notification.Microservice.Infrastructure
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=12345678;Database=NotificationMicroserviceInfrastructure;Port=5480;");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=NotificationMicroserviceInfrastructure;Port=5432;");
         }
     }
 }

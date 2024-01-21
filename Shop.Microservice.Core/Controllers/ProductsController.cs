@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Microservice.Core.Models;
 using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Infrastructure.Services;
 
@@ -46,10 +47,10 @@ namespace Shop.Microservice.Core.Controllers
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(Guid id)
+        [HttpPost("delete", Name ="delete")]
+        public async Task<IActionResult> Delete([FromBody] DeleteProductModel model)
         {
-            await _productService.DeleteProductAsync(id);
+            await _productService.DeleteProductAsync(model.ProductId);
             return NoContent();
         }
     }

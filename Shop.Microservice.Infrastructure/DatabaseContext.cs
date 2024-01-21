@@ -16,8 +16,7 @@ namespace Shop.Microservice.Infrastructure
 
         public DatabaseContext()
         {
-           // Database.EnsureDeleted();
-           // Database.EnsureCreated();
+     
 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
