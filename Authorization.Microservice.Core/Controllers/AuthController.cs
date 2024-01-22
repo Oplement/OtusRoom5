@@ -84,7 +84,7 @@ namespace Authorization.Microservice.Core.Controllers
                 username = username.Value,
                 role = role.Value,
 
-                // нужно забрать с БД
+                // TODO: нужно забрать с БД
                 balance= "",
                 forSend = "",
             };

@@ -18,6 +18,8 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         public async Task<T> Create(T item)
         {
             await _databaseContext.AddAsync(item);
+            await _databaseContext.SaveChangesAsync();
+
             return item;
         }
 
@@ -99,6 +101,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         public async Task Update(T item)
         {
             _databaseContext.Set<T>().Update(item);
+
             await Save();
         }
 
