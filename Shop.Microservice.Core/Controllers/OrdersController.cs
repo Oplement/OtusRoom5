@@ -85,5 +85,12 @@ namespace Shop.Microservice.Core.Controllers
             await _orderService.DeleteOrderAsync(id);
             return NoContent();
         }
+        [HttpGet("user_id")]
+        public async Task<IActionResult> GetAll([FromQuery] Guid userid)
+        {
+            var order = await _orderService.GetOrders(userid);
+            if (order == null) return NotFound();
+            return Ok(order);
+        }
     }
 }

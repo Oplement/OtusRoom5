@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Shop.Microservice.Domain.Entities;
+@model List<OrderProduct>
+@{
     Layout = "_Layout";
 }
 
@@ -11,12 +13,20 @@
         position:relative;
         padding: 10px;
         margin: 30px;
+        border-radius:5px;
     }
     .order{
         
     }
     .summary_orders{
         font-size: 1.5em;
+        position:relative;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        padding-left:50px;
+        padding-right:50px;
+
     }
     .item{
         display: flex;
@@ -29,38 +39,25 @@
 
 
 <div class="history_container">
-    <div class="order">
-        <details>
-            <summary class="summary_orders">
-                Заказ № 1234324532
-            </summary>
-            <div class="item">
-                <p><a href="ссылка на товар"><img src="~/content/icons/logout.svg" alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
-                <div class="title_item">Название товара</div>
-                <div class="price">Price: 5.434</div>
-                <div class="status">Статус: Выдан</div>
-            </div>
-            <div class="item">
-                <p><a href="ссылка на товар"><img src="~/content/icons/logout.svg" alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
-                <div class="title_item">Название товара</div>
-                <div class="price">Price: 5.434</div>
-                <div class="status">Статус: Отменен</div>
-            </div>
-        </details>
-    </div>
-    <div class="order">
-        <details>
-            <summary class="summary_orders">
-                Заказ № 1234324532
-            </summary>
-            <div class="item">
-                <p><a href="ссылка на товар"><img src="~/content/icons/logout.svg" alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
-                <div class="title_item">Название товара</div>
-                <div class="price">Price: 5.434</div>
-                <div class="status">Статус: Выдан</div>
-            </div>
-        </details>
-    </div>
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var orderProduct = Model[i];
+
+        <div class="order">
+            <details>
+                <summary class="summary_orders">
+                    <div>Заказ от @orderProduct.Order.CreateAt.ToString("g")</div> 
+                    <div>Статус: @orderProduct.Order.OrderStatus</div>
+                </summary>
+                <div class="item">
+                    <p><a href="ссылка на товар"><img src=@orderProduct.Product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                    <div class="title_item">@orderProduct.Product.Title</div>
+                    <div class="price">Цена: @orderProduct.Product.Price</div>
+                </div>
+            </details>
+        </div>
+    }
+
 </div> 
 
 
