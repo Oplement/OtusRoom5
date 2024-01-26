@@ -1,0 +1,70 @@
+﻿@using Shop.Microservice.Domain.Entities;
+@using ClientApp.Controllers;
+@model List<OrderWithUserDto>
+@{
+    Layout = "_Layout";
+}
+
+
+<style>
+    .history_container{
+        background-color: #ACC8FF;
+        width: contain;
+        height: contain;
+        position:relative;
+        padding: 10px;
+        margin: 30px;
+        border-radius:5px;
+    }
+    .order{
+        
+    }
+    .summary_orders{
+        font-size: 1.5em;
+        position:relative;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        padding-left:50px;
+        padding-right:50px;
+
+    }
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        font-size: 1.5em;
+    }
+</style>
+
+@*
+<div class="history_container">
+    @foreach (var orderWithUser in Model) // Измените цикл для работы с новой моделью
+    {
+        var order = orderWithUser.Order;
+        var userName = orderWithUser.UserName; // Добавьте переменную для имени пользователя
+
+        
+        <div class="order">
+            <details>
+                <summary class="summary_orders">
+                    <div>Заказ от @order.CreateAt.ToString("g")</div>
+                    <div>Статус: @order.OrderStatus</div>
+                    <div>Пользователь: @userName</div> <!-- Добавьте имя пользователя здесь -->
+                </summary>
+                
+                @foreach (var product in orderWithUser.UserName) // Предполагаем, что у вас есть список продуктов в заказе
+                {
+                    <div class="item">
+                        <p><a href="ссылка на товар"><img src=@product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px;"></a></p>
+                        <div class="title_item">@product.Title</div>
+                        <div class="price">Цена: @product.Price</div>
+                    </div>
+                }
+            </details>
+        </div>
+    }
+</div>
+*@
+
