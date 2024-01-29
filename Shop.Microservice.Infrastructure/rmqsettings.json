@@ -1,0 +1,8 @@
+{
+  "RmqSettings": {
+    "Host": "rattlesnake.rmq.cloudamqp.com",
+    "VHost": "kamufxav",
+    "Login": "kamufxav",
+    "Password": "ERtyoQejNKr2H9JsQaKjHuBhV6ZF-R87"
+  }
+}
