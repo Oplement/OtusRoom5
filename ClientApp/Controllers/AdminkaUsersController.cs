@@ -15,7 +15,7 @@ namespace ClientApp.Controllers
             _requestService = requestService;
         }
 
-        [HttpGet("AdminkaUsers")]
+        [HttpGet("GetUsers")]
         public async Task<Dictionary<Guid, string>> GetUserNames()
         {
             string authServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Authorization");
