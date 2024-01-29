@@ -59,25 +59,18 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             return id;
         }
+
+
         public async Task<List<OrderProduct>> GetOrders(Guid userid)
         {
-            var order = _databaseContext.Orders.FirstOrDefault(m => m.UserId == userid);
-            var id = new Guid();
-            if (order == null)
-            {
-                var data = new Order() { CreateAt = DateTime.UtcNow, OrderStatus = OrderStatus.InCart, UserId = userid };
-                _databaseContext.Orders.Add(data);
-                _databaseContext.SaveChanges();
-                id = data.Id;
-            }
-            else
-            {
-                id = order.Id;
-            }
+            var ordersHistory = _databaseContext.OrderProducts
+                .Where(x=>x.Order.UserId ==userid)
+                .Include(x=>x.Product)
+                .Include(x=>x.Order)
+                .Where(x=>x.Order.OrderStatus != OrderStatus.InCart)
+                .ToList();
 
-            var orders = _databaseContext.OrderProducts.Include(m => m.Product).Where(m => m.OrderId == id).ToList();
-
-            return orders;
+            return ordersHistory;
         }
         public async Task<List<OrderProduct>> GetCart(Guid userid)
         {

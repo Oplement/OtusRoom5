@@ -1,3 +1,5 @@
+using Shop.Microservice.Core;
+using Shop.Microservice.Domain.Common.Interfaces;
 using Shop.Microservice.Infrastructure;
 using Shop.Microservice.Infrastructure.Repositories.Contracts;
 using Shop.Microservice.Infrastructure.Repositories.Implementation;
@@ -12,6 +14,7 @@ builder.Services.AddTransient<ProductService>();
 builder.Services.AddTransient<OrderService>();
 builder.Services.AddTransient<BalanceService>();
 builder.Services.AddTransient<TransactionService>();
+builder.Services.AddScoped<IProducer, RmqProducer>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
