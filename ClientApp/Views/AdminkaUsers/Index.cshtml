@@ -1,0 +1,64 @@
+﻿@using Authorization.Microservice.Domain;
+@model List<User>
+@{
+    Layout = "_Layout";
+}
+
+
+<style>
+    .users_container {
+        background-color: #ACC8FF;
+        width: contain;
+        height: contain;
+        position:relative;
+        padding: 10px;
+        margin: 30px;
+        border-radius:5px;
+    }
+    .user{
+        
+    }
+
+    .summary_users {
+        font-size: 1.5em;
+        position:relative;
+        cursor:pointer;
+        display:flex;
+        justify-content:space-between;
+        padding-left:50px;
+        padding-right:50px;
+
+    }
+    .item{
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        font-size: 1.5em;
+    }
+</style>
+
+
+<div class="users_container">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        var usingUser = Model[i];
+
+        <div class="user">
+            <details>
+                <summary class="summary_users">
+                    <div>Пользователь @usingUser.Username.ToString()</div> 
+                    <div>В роли: @usingUser.Role.ToString()</div>
+                </summary>
+                <div class="item">
+                    <p><a href="Аватар пользователя"><img src=@usingUser.ImagePath alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                    <div class="email_user">@usingUser.Email.ToString()</div>
+                    <div class="id_user">Id: @usingUser.Id.ToString()</div>
+                </div>
+            </details>
+        </div>
+    }
+
+</div> 
+
+
