@@ -17,6 +17,11 @@ namespace Authorization.Microservice.Infrastructure.Services
         {
             return await _repository.Get(email);
         }
+        public async Task<List<User>> GetAllUsers()
+        {
+            var res = await _repository.GetAll();
+            return (List<User>)res;
+        }
         public async Task<List<User>> GetUsersByFilter(string filter)
         {
             return await _repository.GetByFilter(filter);

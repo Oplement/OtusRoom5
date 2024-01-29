@@ -16,23 +16,25 @@ namespace ClientApp.Controllers
         }
 
         [HttpGet("GetUsers")]
-        public async Task<Dictionary<Guid, string>> GetUserNames()
+        public async Task<IActionResult> GetUsers()
         {
             string authServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Authorization");
-            ResponseModel response = _requestService.SendGet(authServiceAddress, "api/users/all", this.HttpContext);
+            ResponseModel response = _requestService.SendGet(authServiceAddress, "auth/getallusers", this.HttpContext);
 
             var userNames = new Dictionary<Guid, string>();
 
             if (response.success)
             {
                 var users = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(response.result.ToString());
-                foreach (var user in users)
-                {
-                    userNames[user.Id] = user.Username;
-                }
+
+                return View(users);
+                //foreach (var user in users)
+                //{
+                //    userNames[user.Id] = user.Username;
+                //}
             }
 
-            return userNames;
+            return View(userNames);
         }
 
         //[HttpGet("AllOrdersWithUsers")]

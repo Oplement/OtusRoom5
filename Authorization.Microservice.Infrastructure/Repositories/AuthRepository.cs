@@ -39,6 +39,11 @@ namespace Authorization.Microservice.Infrastructure.Repositories.Implementation
         }
         public async Task<List<User>> GetByFilter(string filter)
         {
+            if (string.IsNullOrEmpty(filter))
+            {
+                return await _databaseContext.Users.ToListAsync();
+            }
+            
             var res = await _databaseContext.Users.Where(m=>m.Username.ToLower().StartsWith(filter)).ToListAsync();
             return res;
         }

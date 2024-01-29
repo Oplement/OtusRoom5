@@ -63,6 +63,19 @@ namespace Authorization.Microservice.Core.Controllers
         }
 
         /// <summary>
+        /// Авторизация пользователя и отправка токена в ответ
+        /// Передаем email и password с формы в Body(json)
+        /// </summary>
+        /// <returns>JWT Токен</returns>
+        [HttpGet("getAllUsers", Name = "getAllUsers")]
+        public async Task<IActionResult> GetAllUsers()
+        {
+            var persons = await _service.GetAllUsers();
+
+            return Json(persons);
+        }
+
+        /// <summary>
         /// Регистрация пользователя и отправка токена в ответ
         ///  В Header "Authorization" передаем "Bearer {token}"
         /// </summary>
@@ -90,7 +103,6 @@ namespace Authorization.Microservice.Core.Controllers
 
         /// <summary>
         /// Получилить пользователей по фильтру
-        ///  В Header "Authorization" передаем "Bearer {token}"
         /// </summary>
         /// <returns>Email, Role</returns>
         [Authorize(AuthenticationSchemes = "Bearer")]

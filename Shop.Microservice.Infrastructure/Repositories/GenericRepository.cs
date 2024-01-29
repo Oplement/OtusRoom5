@@ -68,11 +68,13 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         }
         public async Task<List<OrderProduct>> GetOrders(Guid userid)
         {
+
+
             var ordersHistory = _databaseContext.OrderProducts
-                .Where(x=>x.Order.UserId ==userid)
-                .Include(x=>x.Product)
-                .Include(x=>x.Order)
-                .Where(x=>x.Order.OrderStatus != OrderStatus.InCart)
+                .Where(x => x.Order.UserId == userid)
+                .Include(x => x.Product)
+                .Include(x => x.Order)
+                .Where(x => x.Order.OrderStatus != OrderStatus.InCart)
                 .ToList();
 
             return ordersHistory;
