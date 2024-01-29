@@ -37,7 +37,11 @@ namespace Authorization.Microservice.Infrastructure.Repositories.Implementation
             var res = await _databaseContext.Users.FirstOrDefaultAsync(m => m.Email == email);
             return res;
         }
-
+        public async Task<List<User>> GetByFilter(string filter)
+        {
+            var res = await _databaseContext.Users.Where(m=>m.Username.ToLower().StartsWith(filter)).ToListAsync();
+            return res;
+        }
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _databaseContext.Set<T>().ToListAsync();

@@ -60,7 +60,12 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             return id;
         }
 
+        public async Task<Balance> GetBalance(Guid userid)
+        {
+            var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId ==  userid);
 
+            return balance;
+        }
         public async Task<List<OrderProduct>> GetOrders(Guid userid)
         {
             var ordersHistory = _databaseContext.OrderProducts

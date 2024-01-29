@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Microservice.Core.Models;
 using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Infrastructure.Services;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Shop.Microservice.Core.Controllers
 {
@@ -11,10 +10,12 @@ namespace Shop.Microservice.Core.Controllers
     public class TransactionsController : ControllerBase
     {
         private readonly TransactionService _transactionService;
+        private readonly BalanceService _balanceService;
 
-        public TransactionsController(TransactionService transactionService)
+        public TransactionsController(TransactionService transactionService, BalanceService balanceService)
         {
             _transactionService = transactionService;
+            _balanceService = balanceService;
         }
 
         [HttpGet]
@@ -32,9 +33,27 @@ namespace Shop.Microservice.Core.Controllers
             return Ok(transaction);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Post([FromBody] Transaction transaction)
+        [HttpPost("post", Name ="post")]
+        public async Task<IActionResult> Post([FromBody] CreateTransactionModel data)
         {
+            var transaction = new Transaction()
+            {
+                Amount = Int64.Parse(data.Amount),
+                SenderID = data.UserId,
+                TimeStamp = DateTime.UtcNow,
+                ReceiverID = data.ReceiverId, 
+                Comment = data.Comment,
+            };
+
+
+            var receiverBalance = await _balanceService.GetBalance(transaction.ReceiverID);
+            receiverBalance.Amount += transaction.Amount;
+            await _balanceService.UpdateBalanceAsync(receiverBalance);
+            
+            var senderBalance = await _balanceService.GetBalance(transaction.SenderID);
+            senderBalance.AmountForSend -= transaction.Amount;
+            await _balanceService.UpdateBalanceAsync(senderBalance);
+
             var createdTransaction = await _transactionService.CreateTransactionAsync(transaction);
             return CreatedAtAction(nameof(Get), new { id = createdTransaction.Id }, createdTransaction);
         }
