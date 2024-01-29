@@ -33,12 +33,30 @@ namespace Shop.Microservice.Infrastructure
             new Product() { Count = 2, Description = "Размеры S,M,L", Id = Guid.NewGuid(), Price = 5999, Title = "Худи", Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg"},
             new Product(){ Count=5, Title = "ПоверБанк", Price = 2399, Description = "10000мАч", Id =  Guid.NewGuid(), Image="https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg" },
             };
-            
+
+
+            var balanceTestUser = new Balance()
+            {
+                Id= Guid.NewGuid(),
+                UserId = Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e"),
+                Amount = 10,
+                AmountForSend = 100
+            };
+            var balanceTestUser2 = new Balance()
+            {
+                Id = Guid.NewGuid(),
+                UserId = Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e"),
+                Amount = 20,
+                AmountForSend = 200
+            };
+          
             var order = new Order() 
             {Id = Guid.NewGuid(), OrderStatus=OrderStatus.InCart,CreateAt=DateTime.UtcNow,UserId= Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e") };
             var orderProduct = new OrderProduct()
             {Id = Guid.NewGuid(), Count = 1,OrderId=order.Id,ProductId=products.First().Id};
-            
+
+            modelBuilder.Entity<Balance>().HasData(balanceTestUser);
+            modelBuilder.Entity<Balance>().HasData(balanceTestUser2);
 
             modelBuilder.Entity<Product>().HasData(products);
             modelBuilder.Entity<Order>().HasData(order);
@@ -47,7 +65,7 @@ namespace Shop.Microservice.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=pass123;Database=postgres;Port=5432;");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=postgres;Port=5432;");
         }
 
     }
