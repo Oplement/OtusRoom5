@@ -82,14 +82,24 @@ namespace Authorization.Microservice.Core.Controllers
                 id = user?.Id,
                 userphoto = user?.ImagePath,
                 username = username.Value,
-                role = role.Value,
-
-                // TODO: нужно забрать с БД
-                balance= "",
-                forSend = "",
+                role = role.Value
             };
 
             return Ok(response);
+        }
+
+        /// <summary>
+        /// Получилить пользователей по фильтру
+        ///  В Header "Authorization" передаем "Bearer {token}"
+        /// </summary>
+        /// <returns>Email, Role</returns>
+        [Authorize(AuthenticationSchemes = "Bearer")]
+        [HttpPost("getUsersByFilter", Name = "getUsersByFilter")]
+        public async Task<IActionResult> GetUsersByFilter([FromBody] GetByFilterModel filterData)
+        {
+            var users = _service.GetUsersByFilter(filterData.Filter.ToString()).Result;
+          
+            return Json(users);
         }
 
         /// <summary>

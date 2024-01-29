@@ -4,13 +4,13 @@
 @{
     Layout = "_Layout";
 }
-
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="/js/my.js"></script>
+</head>
     <style>
     
 
-      /*   .form-group {
-            margin-bottom: 15px;
-        } */
         .input1, textarea {
         display: flex;
         align-items: center;
@@ -34,10 +34,6 @@
         border-radius: 3px;
     }
 
-       /*  .comment-box {
-            height: 100px;
-        } */
-
         .form{
         background-color: #ACC8FF;
         width: 70%;
@@ -54,25 +50,96 @@
         margin: 0px auto;
         border-radius: 5px;
     }
-        /* Additional CSS to match your design */
     </style>
+<script>
 
-    <form method="post" class="form">
+
+    function chooseEmployee(email, id) {
+        const el = document.getElementById('recipient');
+        el.value = email;
+        const selectElement = document.getElementById("users");
+        document.getElementById("toID").value = id ;
+        selectElement.innerHTML = "";
+
+    }
+
+    function getUsers( text) {
+
+
+      
+            $.ajax({
+                url: 'sending/getusers',
+                method: 'get',             /* Метод передачи (post или get) */
+                dataType: 'html',          /* Тип данных в ответе (xml, json, script, html). */
+                data: { name: text },     /* Параметры передаваемые в запросе. */
+                success: function (data) {   /* функция которая будет выполнена после успешного запроса.  */
+                    const selectElement = document.getElementById("users");
+                    selectElement.innerHTML = "";
+                    var arr = JSON.parse(data);
+                    console.log(arr[0]);
+
+                    for (var i = 0; i < arr.length; i++) {
+                        selectElement.innerHTML += "<button style='margin-left:10px;' type='button' onclick=chooseEmployee('" + arr[i].email+ "','"+ arr[i].id +"') style='display:flex'><img style='width:50px; height:50px 'src='" + arr[i].imagePath + "'></img> <div style='padding-top:5px'>" + arr[i].username + " <br/> " + arr[i].email + "</div></button>";
+                    }
+
+                }
+            });
+        
+       
+    }
+
+    function checkForm(){
+        var to = document.getElementById('recipient');
+        if(!to.value){
+             document.getElementById('error').removeAttribute('hidden');
+            document.getElementById('error').innerHTML = 'Не указан получатель';
+            return;
+        }
+        document.getElementById('error').hidden = 'hidden';
+
+        var money = document.getElementById('amount').value;
+        var ost = document.getElementById('balance2').innerHTML;
+        if(money <= 0){
+            document.getElementById('error').removeAttribute('hidden');
+
+            document.getElementById('error').innerHTML = 'Сумма отправки равна нулю';
+            return;
+        }
+        if(ost < money){
+            document.getElementById('error').removeAttribute('hidden');
+
+            document.getElementById('error').innerHTML = 'Сумма больше чем доступно для отправки';
+            return;
+        }
+        document.getElementById('error').hidden = 'hidden';
+        document.getElementById('form1').submit();
+
+    }
+</script>
+
+    <form method="post"  action="/sending/send" class="form" id="form1">
         <div class="form-group">
+        <label id="error" hidden="hidden"></label>
+            <br />
+            <br/>
         <label for="recipient" class="labels">Кому:</label>
-            <input type="text" id="recipient" name="Recipient" class="input1">
+        <input type="text" onkeyup="getUsers(this.value)" id="recipient" name="to" class="input1">
+        <input type="text" hidden="hidden" id="toID" name="toID" class="input2">
+
+        <div style="margin-top:-15px;display:flex; " id="users"></div>
+        <br />
         </div>
 
         <div class="form-group">
             <label for="amount" class="labels">Сколько:</label>
-        <input type="number" id="amount" name="Amount" class="input1">
+        <input type="number" id="amount" name="amount" class="input1">
         </div>
 
         <div class="form-group">
         <label for="comments" class="labels">Комментарий:</label>
-            <textarea id="comments" name="Comments" class="inputComments"></textarea>
+            <textarea id="comments" name="comment" class="inputComments"></textarea>
         </div>
 
-        <button type="submit" class="button">Отправить</button>
+        <button type="button" id="btn1" onclick="checkForm()" class="button">Отправить</button>
     </form>
 

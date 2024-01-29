@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Shop.Microservice.Infrastructure;
@@ -11,9 +12,11 @@ using Shop.Microservice.Infrastructure;
 namespace Shop.Microservice.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240128191911_addReceiverIdtotransactionandremovestatus")]
+    partial class addReceiverIdtotransactionandremovestatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,22 +43,6 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Balances");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("97fd21fb-ebbc-4f7e-96e1-7a3f5545a19e"),
-                            Amount = 10.0,
-                            AmountForSend = 100.0,
-                            UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
-                        },
-                        new
-                        {
-                            Id = new Guid("40e3e3f5-be39-4db9-827b-c42c4a0ea0f4"),
-                            Amount = 20.0,
-                            AmountForSend = 200.0,
-                            UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e")
-                        });
                 });
 
             modelBuilder.Entity("Shop.Microservice.Domain.Common.Product", b =>
@@ -89,7 +76,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2a8a3ff6-6ee2-4fd8-a3e9-c9eaa1011937"),
+                            Id = new Guid("37947963-eedf-4d80-999e-7698c7f2b399"),
                             Count = 2,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
@@ -98,7 +85,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("12cc0a90-2e23-46f0-bf89-3392331ad1fd"),
+                            Id = new Guid("ae12c72c-dae1-40eb-b7b1-adebb8a56ecd"),
                             Count = 5,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
@@ -107,7 +94,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("4d66d925-31eb-4ec8-8c63-14fa4a52e89d"),
+                            Id = new Guid("ccc3ff8b-f4a0-41d2-84ec-93035580b602"),
                             Count = 2,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
@@ -116,7 +103,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d7d33e05-d220-4eef-b7f1-8e53c16f8347"),
+                            Id = new Guid("e870e54c-8ac9-4219-9e44-8dc867640e06"),
                             Count = 5,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
@@ -125,7 +112,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("989f7bcd-9459-4955-9076-2f34cb7185d6"),
+                            Id = new Guid("134e0b76-e7fa-4270-9e04-4b1ef0f457e2"),
                             Count = 2,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
@@ -134,7 +121,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("6b3959f9-ad81-45ed-be1d-805568344a2a"),
+                            Id = new Guid("50723628-8ee8-4be4-b9e3-f886583b24d4"),
                             Count = 5,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
@@ -143,7 +130,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("640e3e8a-db87-4fa4-a245-0e9cb5d82ec4"),
+                            Id = new Guid("ad4a157e-704d-4373-886f-a3f1de02339f"),
                             Count = 2,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
@@ -152,7 +139,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("e06b6537-d4a7-46d4-a1b3-c067f5929d0c"),
+                            Id = new Guid("3479e045-1bf4-4ffb-9c89-31089731a7f9"),
                             Count = 5,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
@@ -161,7 +148,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c507c9d4-be90-450c-ba6a-1c76674b8f5e"),
+                            Id = new Guid("54500673-7747-4aec-a399-d956b6d6a2c8"),
                             Count = 2,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
@@ -170,7 +157,7 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("fa72d29a-3e6c-46e1-bcfd-7b6066d2fc0a"),
+                            Id = new Guid("57e37102-d86e-454b-adde-ab7b9c04735f"),
                             Count = 5,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
@@ -228,8 +215,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("662a4810-254c-4574-acbe-8b3bc12cf1cb"),
-                            CreateAt = new DateTime(2024, 1, 29, 14, 32, 43, 812, DateTimeKind.Utc).AddTicks(3017),
+                            Id = new Guid("4486afc4-e675-4797-924d-c63ac228c5d3"),
+                            CreateAt = new DateTime(2024, 1, 28, 19, 19, 11, 37, DateTimeKind.Utc).AddTicks(3413),
                             OrderStatus = 0,
                             UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
                         });
@@ -261,10 +248,10 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c12bbbba-6504-4d36-b12e-e0f1fa397d13"),
+                            Id = new Guid("ca1a589c-c910-4b05-a0c7-d9d3b0133d7d"),
                             Count = 1,
-                            OrderId = new Guid("662a4810-254c-4574-acbe-8b3bc12cf1cb"),
-                            ProductId = new Guid("2a8a3ff6-6ee2-4fd8-a3e9-c9eaa1011937")
+                            OrderId = new Guid("4486afc4-e675-4797-924d-c63ac228c5d3"),
+                            ProductId = new Guid("37947963-eedf-4d80-999e-7698c7f2b399")
                         });
                 });
 

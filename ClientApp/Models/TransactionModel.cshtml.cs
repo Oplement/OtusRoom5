@@ -20,20 +20,14 @@ public class TransactionModel : PageModel
 
     public void OnGet()
     {
-        // Initialization code or loading data if needed
     }
 
     public IActionResult OnPost()
     {
         if (!ModelState.IsValid)
         {
-            // Handle the validation errors
             return Page();
         }
-
-        // Handle the post (e.g., process the transaction)
-
-        // Redirect to a confirmation page or the same page with a success message
         return RedirectToPage("SuccessPage");
     }
 }
