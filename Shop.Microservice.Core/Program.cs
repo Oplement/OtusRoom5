@@ -4,6 +4,7 @@ using Shop.Microservice.Infrastructure;
 using Shop.Microservice.Infrastructure.Repositories.Contracts;
 using Shop.Microservice.Infrastructure.Repositories.Implementation;
 using Shop.Microservice.Infrastructure.Services;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,11 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>(); // Используйте AddDbContext, если DatabaseContext требует параметров в конструкторе
 builder.Services.AddScoped(typeof(IRepository<>), typeof(GenericRepository<>));
 builder.Services.AddTransient<ProductService>();
+
 builder.Services.AddTransient<OrderService>();
 builder.Services.AddTransient<BalanceService>();
 builder.Services.AddTransient<TransactionService>();
 builder.Services.AddScoped<IProducer, RmqProducer>();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

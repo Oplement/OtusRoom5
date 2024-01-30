@@ -12,7 +12,6 @@ namespace Notification.Microservice.Core.Services
 
         public void Send(string toName, string toEmail, string subject, string text, string fromName,string fromEmail)
         {
-
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress(fromName, fromEmail));
                 message.To.Add(new MailboxAddress(toName, toEmail));

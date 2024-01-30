@@ -43,7 +43,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         }
         public async Task<Guid> GetCartOrderByUserId(Guid userid)
         {
-            var order = _databaseContext.Orders.FirstOrDefault(m => m.UserId == userid && m.OrderStatus == OrderStatus.InCart);
+            var order = _databaseContext.Orders.Include(m=>m.OrderProducts).FirstOrDefault(m => m.UserId == userid && m.OrderStatus == OrderStatus.InCart);
             var id = new Guid();
             if (order == null)
             {
@@ -68,14 +68,12 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         }
         public async Task<List<OrderProduct>> GetOrders(Guid userid)
         {
-            var ordersHistory = _databaseContext.OrderProducts
-                .Where(x=>x.Order.UserId ==userid)
-                .Include(x=>x.Product)
-                .Include(x=>x.Order)
-                .Where(x=>x.Order.OrderStatus != OrderStatus.InCart)
-                .ToList();
+            var df = _databaseContext.Orders.Include(m => m.OrderProducts).Where(x => x.UserId == userid);
+             
 
-            return ordersHistory;
+
+
+            return new List<OrderProduct>();
         }
         public async Task<List<OrderProduct>> GetCart(Guid userid)
         {
@@ -124,9 +122,23 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
         public async Task OrderCart(Guid orderid)
         {
-            var order = _databaseContext.Orders.FirstOrDefault(m => m.Id == orderid);
+            var order = _databaseContext.Orders.Include(m=>m.OrderProducts).ThenInclude(m=>m.Product).FirstOrDefault(m => m.Id == orderid);
             order.OrderStatus = OrderStatus.InProgress;
+
+
+            var sum = 0;
+
+            foreach (var item in order.OrderProducts)
+            {
+                sum += item.Count * item.Product.Price;
+            }
+            
+            var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId == order.UserId);
+            balance.Amount -= sum;
+
             await _databaseContext.SaveChangesAsync();
+
+
         }
 
         public async Task RemoveOrderProduct(Guid orderid, Guid productid)

@@ -29,12 +29,16 @@ namespace ClientApp.Middlewares
                 context.Items.Add("role", user.role);
                 context.Items.Add("userphoto", user.userphoto);
 
-
+                
                 var responseBalance = _requestService.SendGet
               (MicroserviceDictionary.GetMicroserviceAdress("Shop"), $"api/balances/{user.id}", context);
-                var balance = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseBalance.result.ToString());
-                context.Items.Add("balance", balance.amount);
-                context.Items.Add("forSend", balance.amountForSend);
+                if (responseBalance.success)
+                {
+                    var balance = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseBalance.result.ToString());
+                    context.Items.Add("balance", balance.amount);
+                    context.Items.Add("forSend", balance.amountForSend);
+                }
+               
             }// если не забрался, то кидаем на авторизацию
             else if(!context.Request.Path.Value.Contains("auth"))
             {
