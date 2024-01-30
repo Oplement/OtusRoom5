@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Shop.Microservice.Core.Models;
 using Shop.Microservice.Domain.Common.Interfaces;
 
 namespace Shop.Microservice.Core.Controllers
@@ -14,9 +15,9 @@ namespace Shop.Microservice.Core.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> SendMessage(string message, string topic, string userName, string email)
+        public async Task<IActionResult> SendMessage([FromBody] RmqRequestModel requestModel)
         {
-            _producer.Produce(message,topic,userName,email);
+            _producer.Produce(requestModel.Content,requestModel.Topic,requestModel.UserName,requestModel.Email);
             return Ok();
         }
     }
