@@ -47,7 +47,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             var id = new Guid();
             if (order == null)
             {
-                var data = new Order() { CreateAt = DateTime.UtcNow, OrderStatus = OrderStatus.InCart, UserId = userid };
+                var data = new Order() { CreateAt = DateTime.Now, OrderStatus = OrderStatus.InCart, UserId = userid };
                 _databaseContext.Orders.Add(data);
                 _databaseContext.SaveChanges();
                 id = data.Id;
@@ -128,8 +128,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             var order = _databaseContext.Orders.Include(m=>m.OrderProducts).ThenInclude(m=>m.Product).FirstOrDefault(m => m.Id == orderid);
             order.OrderStatus = OrderStatus.InProgress;
-
-
+            order.CreateAt = DateTime.Now;
             var sum = 0;
 
             foreach (var item in order.OrderProducts)
