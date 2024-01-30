@@ -66,14 +66,14 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             return balance;
         }
-        public async Task<List<OrderProduct>> GetOrders(Guid userid)
+        public async Task<List<Order>> GetOrders(Guid userid)
         {
-            var df = _databaseContext.Orders.Include(m => m.OrderProducts).Where(x => x.UserId == userid);
+             var orders =_databaseContext.Orders.Include(m => m.OrderProducts).ThenInclude(m=>m.Product).Where(x => x.UserId == userid).ToList();
              
 
 
 
-            return new List<OrderProduct>();
+            return orders;
         }
         public async Task<List<OrderProduct>> GetCart(Guid userid)
         {
@@ -131,6 +131,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             foreach (var item in order.OrderProducts)
             {
                 sum += item.Count * item.Product.Price;
+                _databaseContext.Products.FirstOrDefault(m=>m.Id == item.ProductId).Count -= item.Count;
             }
             
             var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId == order.UserId);
