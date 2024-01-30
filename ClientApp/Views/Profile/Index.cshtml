@@ -1,0 +1,82 @@
+﻿@using Authorization.Microservice.Domain;
+@{
+    Layout = "_Layout";
+}
+@model User
+<style>
+
+    .input1{
+        display: block
+    }
+    .input1, textarea {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 16%;
+        height: 30px;
+        border-radius: 3px;
+    }
+    .history_container {
+        background-color: #ACC8FF;
+        width: contain;
+        height: contain;
+        position: relative;
+        padding: 10px;
+        margin: 30px;
+        border-radius: 5px;
+    }
+</style>
+<script>
+
+    function submitt(el) {
+
+        console.log(el.value);
+        if (el.value.includes('.jpg') || el.value.includes('.JPG') || el.value.includes('.png') || el.value.includes('.PNG') || el.value.includes('.jpeg') || el.value.includes('.JPEG')) {
+            document.getElementById('submitError').hidden = 'hidden';
+
+            document.getElementById('form').submit();
+        }
+        else {
+            document.getElementById('submitError').removeAttribute('hidden');
+        }
+    }
+</script>
+<div class="history_container"  style="margin-left:50px">
+    <form  id="form" method="post" action="/profile/savephoto" enctype="multipart/form-data">
+
+
+        <div>
+            <label>Фотография</label>
+
+            <img width="138" height="142" src="@Model.ImagePath" />
+            <label hidden="hidden" id="submitError" style="color:darkred">Доступные форматы файла: jpg, png, jpeg</label>
+            <br />
+            <br />
+            <div class="form-group">
+
+                <label class="input-file">
+                    <input onchange="submitt(this)" id="photoId" type="file" name="file">
+                </label>
+
+            </div>
+        </div>
+        </form>
+        
+        <div>
+            <form method="post" action="/profile/saveuser">
+            <label>Имя пользователя:</label>
+            <input class="input1" id="username" name="username" value="@Model.Username"/>
+            <br/>
+            <label>Email:</label>
+            <input class="input1" id="email" name="email" value="@Model.Email" />
+            <br/>
+            <label>Новый пароль:</label>
+            <input id="newpass" class="input1" name="newpass" value="***" />
+            <br/>
+            <button type="submit">Сохранить</button>
+            </form>
+        </div>
+
+
+
+</div>

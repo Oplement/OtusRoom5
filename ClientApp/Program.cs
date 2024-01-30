@@ -2,13 +2,17 @@
 using ClientApp;
 using ClientApp.Middlewares;
 using ClientApp.Services;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MemoryBufferThreshold = Int32.MaxValue;
+});
 builder.Services.AddTransient<JsonService>();
 builder.Services.AddTransient<RequestService>();
 

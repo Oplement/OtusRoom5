@@ -22,6 +22,26 @@ namespace Authorization.Microservice.Infrastructure.Services
             var res = await _repository.GetAll();
             return (List<User>)res;
         }
+        public async Task SaveUserPhoto(Guid id, string path)
+        {
+            var user = await _repository.Get(id);
+            user.ImagePath = path;
+            await _repository.Update(user);
+
+        }
+        public async Task SaveUserInfo(Guid id, string email, string username, string newpass)
+        {
+            var user = await _repository.Get(id);
+            user.Username = username;
+            user.Email = email;
+
+            if (newpass != "***")
+            {
+                user.PasswordHash = await Hash(newpass);
+            }
+
+            await _repository.Update(user);
+        }
         public async Task<List<User>> GetUsersByFilter(string filter)
         {
             return await _repository.GetByFilter(filter);
