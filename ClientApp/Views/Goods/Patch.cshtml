@@ -1,0 +1,109 @@
+﻿@using Shop.Microservice.Domain.Entities;
+@model List<OrderProduct>
+@{
+    Layout = "_Layout";
+    // Предполагается, что у вас есть модель для товара
+    var title = "Введите название товара"; // Заглушка для названия товара
+    var price = 6754; // Заглушка для цены
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Добавление товара</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+            .navigation button {
+                margin-right: 5px;
+            }
+
+        .main-content {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+            .main-content form > label {
+                display: block;
+                margin-top: 10px;
+            }
+
+            .main-content form > input,
+            .main-content form > textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+            }
+
+                .main-content form > input[type="submit"] {
+                    margin-top: 10px;
+                    padding: 10px 20px;
+                    background-color: #5cb85c;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+
+        .admin-panel {
+            text-align: center;
+        }
+
+            .admin-panel img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <!-- Навигация -->
+            <button>Orders</button>
+            <button>Goods</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Форма для добавления товара -->
+            <form method="post" enctype="multipart/form-data">
+                <label for="title">Title of good:</label>
+                <input type="text" id="title" name="title" value="@title" />
+
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" value="@price" />
+
+                <label for="description">Description of good:</label>
+                <textarea id="description" name="description">Введите описание товара</textarea>
+
+                <label for="image">Image:</label>
+                <input type="file" id="image" name="image" />
+
+                <input type="submit" value="Save" />
+            </form>
+        </div>
+
+        <div class="admin-panel">
+            <!-- Панель администратора -->
+            <img src="path-to-admin-photo.jpg" alt="Photo" />
+            <span>Administrator</span>
+        </div>
+    </div>
+</body>
+</html>
+

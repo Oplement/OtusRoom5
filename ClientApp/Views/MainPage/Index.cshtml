@@ -81,7 +81,7 @@
                      @{if(Context.Items["role"]?.ToString() == "admin")
                         {
                             <div style="display:flex">
-                              <form action="mainpage/patch" method="post">
+                              <form action="/Goods/Patch" method="post">
                               <input hidden="hidden" name="id" class="id" value="@product.Id"/>
                                 <button type="submit">
                                     <img src="https://avatars.mds.yandex.net/i?id=47f36a9c1da0cf4123663b5b8bd53e1652c91cf0-6996969-images-thumbs&n=13" style="width:20px;height:20px" alt="buttonpng" border="0" />
