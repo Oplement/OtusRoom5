@@ -22,49 +22,61 @@ namespace ClientApp.Controllers
         [HttpGet("AllOrdersWithDetails")]
         public async Task<IActionResult> AllOrdersWithDetails()
         {
-            // Получение адреса сервиса
+            // Получение всех заказов
             string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            // Отправка запроса к API для получения всех заказов
+            ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders", this.HttpContext);
+
+            // Десериализация ответа в список заказов
+            var orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
+            
+
+            // Получение пользователей
             string authServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Authorization");
-
-            // Получение всех заказов с продуктами
-            var orderProductsResponse = await _requestService.SendGetAsync(shopServiceAddress, "api/orderproducts/all", this.HttpContext);
-            var orderProducts = orderProductsResponse.success
-                ? Newtonsoft.Json.JsonConvert.DeserializeObject<List<OrderProduct>>(orderProductsResponse.result.ToString())
-                : new List<OrderProduct>();
-
-            // Получение данных о пользователях
-            var usersResponse = await _requestService.SendGetAsync(authServiceAddress, "api/users/all", this.HttpContext);
-            var users = usersResponse.success
-                ? Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(usersResponse.result.ToString())
-                : new List<User>();
-            var userDictionary = users.ToDictionary(u => u.Id, u => u.Username);
-
-            // Преобразование в DTO
-            var orderProductUserDtos = orderProducts.Select(op => new OrderProductUserDto
+            ResponseModel usersResponse = _requestService.SendGet(authServiceAddress, "auth/getallusers", this.HttpContext);
+            var users = new List<User>();
+            if (usersResponse.success)
             {
-                OrderId = op.Order.Id,
-                ProductTitle = op.Product.Title,
-                ProductImage = op.Product.Image,
-                ProductPrice = op.Product.Price,
-                UserName = userDictionary.ContainsKey(op.Order.UserId) ? userDictionary[op.Order.UserId] : "Неизвестный пользователь",
-                Count = op.Count,
-                OrderStatus = op.Order.OrderStatus.ToString(),
-                CreateAt = op.Order.CreateAt
-            }).ToList();
+                users = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(usersResponse.result.ToString());
+            }
 
-            // Отправляем данные в представление
-            return View(orderProductUserDtos);
+            // Создание списка DTO
+            var orderDetails = new List<OrderProductUserDto>();
+
+            foreach (var order in orders)
+            {
+                var user = users.FirstOrDefault(u => u.Id == order.UserId);
+                foreach (var op in order.OrderProducts)
+                {
+                    orderDetails.Add(new OrderProductUserDto
+                    {
+                        OrderId = order.Id,
+                        OrderCreatedAt = order.CreateAt,
+                        OrderStatus = order.OrderStatus.ToString(),
+                        UserName = user != null ? user.Username : "Неизвестный",
+                        ProductTitle = op.Product.Title,
+                        ProductImage = op.Product.Image,
+                        ProductPrice = op.Product.Price,
+                        Quantity = op.Count
+                    });
+                }
+            }
+
+            return View(orderDetails);
         }
 
     }
 
     public class OrderProductUserDto
     {
-        public Order Order { get; set; }
-        public Product Product { get; set; }
-        public string UserName { get; set; }
-        public int Count { get; set; }
+        public Guid OrderId { get; set; }
+        public DateTime OrderCreatedAt { get; set; }
         public string OrderStatus { get; set; }
-        public DateTime CreateAt { get; set; }
+        public string UserName { get; set; }
+        public string ProductTitle { get; set; }
+        public string ProductImage { get; set; }
+        public int ProductPrice { get; set; }
+        public int Quantity { get; set; }
     }
 }

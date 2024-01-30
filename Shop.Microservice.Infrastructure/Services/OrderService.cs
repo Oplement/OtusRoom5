@@ -19,7 +19,7 @@ namespace Shop.Microservice.Infrastructure.Services
 
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
-            return await _repository.GetAll();
+            return await _repository.GetAllOrders();
         }
 
         public async Task<Order> GetOrderByIdAsync(Guid id)

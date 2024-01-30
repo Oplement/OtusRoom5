@@ -1,0 +1,63 @@
+﻿@using ClientApp.Controllers;
+@model List<OrderProductUserDto>
+@{
+    Layout = "_Layout";
+}
+
+
+<style>
+    .users_container {
+        background-color: #ACC8FF;
+        width: contain;
+        height: contain;
+        position: relative;
+        padding: 10px;
+        margin: 30px;
+        border-radius: 5px;
+    }
+
+    .user {
+    }
+
+    .summary_users {
+        font-size: 1.5em;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        font-size: 1.5em;
+    }
+</style>
+
+
+<div class="history_container">
+    @foreach (var item in Model)
+    {
+        <div class="order">
+            <details>
+                <summary class="summary_orders">
+                    <div>Заказ @item.OrderId от @item.OrderCreatedAt.ToString("g")</div>
+                    <div>Пользователь: @item.UserName</div>
+                    <div>Статус: @item.OrderStatus</div>
+                </summary>
+                <div class="item">
+                    <p><a href="#"><img src=@item.ProductImage alt="Image" style="width:180px; height:180px;"></a></p>
+                    <div>@item.ProductTitle</div>
+                    <div>Цена: @item.ProductPrice</div>
+                    <div>Количество: @item.Quantity</div>
+                </div>
+            </details>
+        </div>
+    }
+</div>
+
+

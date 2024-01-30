@@ -7,6 +7,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Contracts
         where T : class
     {
         Task<IEnumerable<T>> GetAll();
+        Task<List<Order>> GetAllOrders();
         Task<T> Get(Guid id);
         Task<Balance> GetBalance(Guid userid);
         Task<List<Order>> GetOrders(Guid userid);

@@ -88,7 +88,11 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             return await _databaseContext.Set<T>().ToListAsync();
         }
-
+        public async Task<List<Order>> GetAllOrders()
+        {
+            var orders = await _databaseContext.Orders.Include(m => m.OrderProducts).ThenInclude(_ => _.Product).ToListAsync();
+            return orders;
+        }
         public async Task Save()
         {
             await _databaseContext.SaveChangesAsync();
