@@ -22,11 +22,11 @@ namespace ClientApp.Controllers
             
             ResponseModel model = _requestService.SendGet(service,$"api/orders/user_id?userid={HttpContext.Items["userid"]}",this.HttpContext);
 
-            var historyOrders = new List<OrderProduct>();
+            var historyOrders = new List<Order>();
 
             if (model.success)
             {
-                historyOrders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<OrderProduct>>(model.result.ToString());
+                historyOrders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(model.result.ToString());
             }
 
             return View(historyOrders);

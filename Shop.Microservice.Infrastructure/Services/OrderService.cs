@@ -26,7 +26,7 @@ namespace Shop.Microservice.Infrastructure.Services
         {
             return await _repository.Get(id);
         }
-        public async Task<List<OrderProduct>> GetOrders(Guid userid)
+        public async Task<List<Order>> GetOrders(Guid userid)
         {
             return await _repository.GetOrders(userid);
         }
