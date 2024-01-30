@@ -135,10 +135,11 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             foreach (var item in order.OrderProducts)
             {
                 sum += item.Count * item.Product.Price;
-                _databaseContext.Products.FirstOrDefault(m=>m.Id == item.ProductId).Count -= item.Count;
+                var prod = await _databaseContext.Products.FirstOrDefaultAsync(m => m.Id == item.ProductId);
+                prod.Count -= item.Count;
             }
             
-            var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId == order.UserId);
+            var balance = await _databaseContext.Balances.FirstOrDefaultAsync(m=>m.UserId == order.UserId);
             balance.Amount -= sum;
 
             await _databaseContext.SaveChangesAsync();
@@ -148,7 +149,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
         public async Task RemoveOrderProduct(Guid orderid, Guid productid)
         {
-            var orderProduct = _databaseContext.OrderProducts.FirstOrDefault(m => m.OrderId == orderid && m.ProductId == productid);
+            var orderProduct = await _databaseContext.OrderProducts.FirstOrDefaultAsync(m => m.OrderId == orderid && m.ProductId == productid);
             _databaseContext.OrderProducts.Remove(orderProduct);
 
             await _databaseContext.SaveChangesAsync();
