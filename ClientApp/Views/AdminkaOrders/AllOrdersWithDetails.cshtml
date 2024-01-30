@@ -1,5 +1,6 @@
 ﻿@using ClientApp.Controllers;
-@model List<OrderProductUserDto>
+@using Shop.Microservice.Domain.Entities;
+@model Dictionary<string, List<Order>>;
 @{
     Layout = "_Layout";
 }
@@ -40,23 +41,36 @@
 
 
 <div class="history_container">
-    @foreach (var item in Model)
+    @foreach (var dict in Model)
     {
-        <div class="order">
-            <details>
-                <summary class="summary_orders">
-                    <div>Заказ @item.OrderId от @item.OrderCreatedAt.ToString("g")</div>
-                    <div>Пользователь: @item.UserName</div>
-                    <div>Статус: @item.OrderStatus</div>
-                </summary>
-                <div class="item">
-                    <p><a href="#"><img src=@item.ProductImage alt="Image" style="width:180px; height:180px;"></a></p>
-                    <div>@item.ProductTitle</div>
-                    <div>Цена: @item.ProductPrice</div>
-                    <div>Количество: @item.Quantity</div>
-                </div>
-            </details>
-        </div>
+        var user = dict.Key;
+
+        @foreach (var order in dict.Value)
+        {
+            <div class="order">
+                <details>
+                    <summary class="summary_orders">
+                        <div>Заказ @order.Id от @order.CreateAt</div>
+                        <div>Пользователь: @user</div>
+                        <div>Статус: @order.OrderStatus</div>
+                    </summary>
+                  @{
+                      foreach (var prod in order.OrderProducts)
+                        {
+                            <div class="item">
+                                <p><a href="#"><img src=@prod.Product.Image alt="Image" style="width:180px; height:180px;"></a></p>
+                                <div>@prod.Product.Title</div>
+                                <div>Цена: @prod.Product.Price</div>
+                                <div>Количество: @prod.Count</div>
+                                <div><b>Сумма: @prod.Product.Price * @prod.Count</b></div>
+                            </div>
+                        }
+                  }
+                </details>
+            </div>
+        }
+        
+      
     }
 </div>
 

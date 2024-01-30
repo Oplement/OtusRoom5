@@ -20,7 +20,6 @@ namespace ClientApp.Controllers
         [HttpGet]
         public IActionResult GetOne(string id)
         {
-
             return View();
         }
 

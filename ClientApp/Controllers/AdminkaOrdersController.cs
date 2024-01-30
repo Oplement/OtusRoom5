@@ -42,41 +42,22 @@ namespace ClientApp.Controllers
             }
 
             // Создание списка DTO
-            var orderDetails = new List<OrderProductUserDto>();
+            var dict = new Dictionary<string, List<Order>>();
 
             foreach (var order in orders)
             {
                 var user = users.FirstOrDefault(u => u.Id == order.UserId);
-                foreach (var op in order.OrderProducts)
+                if (!dict.ContainsKey(user.Email))
                 {
-                    orderDetails.Add(new OrderProductUserDto
-                    {
-                        OrderId = order.Id,
-                        OrderCreatedAt = order.CreateAt,
-                        OrderStatus = order.OrderStatus.ToString(),
-                        UserName = user != null ? user.Username : "Неизвестный",
-                        ProductTitle = op.Product.Title,
-                        ProductImage = op.Product.Image,
-                        ProductPrice = op.Product.Price,
-                        Quantity = op.Count
-                    });
+                    dict.Add(user.Email, new List<Order>());
                 }
+
+                dict[user.Email].Add(order);
             }
 
-            return View(orderDetails);
+            return View(dict);
         }
 
     }
 
-    public class OrderProductUserDto
-    {
-        public Guid OrderId { get; set; }
-        public DateTime OrderCreatedAt { get; set; }
-        public string OrderStatus { get; set; }
-        public string UserName { get; set; }
-        public string ProductTitle { get; set; }
-        public string ProductImage { get; set; }
-        public int ProductPrice { get; set; }
-        public int Quantity { get; set; }
-    }
 }
