@@ -11,59 +11,40 @@ namespace ClientApp.Controllers
     public class GoodsController : Controller
     {
         RequestService _requestService;
-        public GoodsController(RequestService requestService) 
+        public GoodsController(RequestService requestService)
         {
             _requestService = requestService;
         }
 
-        [HttpGet("Patch")]
-        public IActionResult Patch()
+        [HttpGet("Get/{id}")]
+        public IActionResult Get(Guid id)
         {
             string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-            ResponseModel response_get_all_products = _requestService.SendGet(service, "api/products", this.HttpContext);
+            ResponseModel response_get_all_products = _requestService.SendGet(service, $"api/products/{id}", this.HttpContext);
 
-            var products = new List<Product>();
+            var product = new Product();
 
             if (response_get_all_products.success)
             {
-                products = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Product>>(response_get_all_products.result.ToString());
+                product = Newtonsoft.Json.JsonConvert.DeserializeObject<Product>(response_get_all_products.result.ToString());
             }
 
-            return View(products);
+            return View(product);
         }
 
-        //[HttpGet("AllOrdersWithUsers")]
-        //public async Task<IActionResult> AllOrdersWithUsers()
-        //{
-        //    var orders = GetAllOrders();
-        //    var userNames = await GetUserNames();
+        [HttpPost("update")]
+        public IActionResult UpdateProduct([FromForm]string title, [FromForm] int count,[FromForm] string description, [FromForm] string image, [FromForm] int price,[FromForm] Guid id)
+        {
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
 
-        //    var ordersWithUsers = orders.Select(order => new OrderWithUserDto
-        //    {
-        //        Order = order,
-        //        UserName = userNames.ContainsKey(order.UserId) ? userNames[order.UserId] : "Неизвестный пользователь"
-        //    }).ToList();
+            ResponseModel response_get_all_products = _requestService.SendPost(
+                service,
+                $"api/products/update", 
+                new {title=title, description = description, count = count, image=image, id = id, price = price},
+                this.HttpContext);
 
-        //    return View(ordersWithUsers);
-        //}
 
-        //public List<Order> GetAllOrders()
-        //{
-        //    string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-        //    ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders/all", this.HttpContext);
-
-        //    if (response.success)
-        //    {
-        //        return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
-        //    }
-
-        //    return new List<Order>();
-        //}
-
+            return Redirect($"Get/{id}");
+        }
     }
-    //public class OrderWithUserDto
-    //{
-    //    public Order Order { get; set; }
-    //    public string UserName { get; set; }
-    //}
 }

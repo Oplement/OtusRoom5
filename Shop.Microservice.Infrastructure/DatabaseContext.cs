@@ -65,7 +65,7 @@ namespace Shop.Microservice.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=pass123;Database=postgres;Port=5432;");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=otus_glazev_test;Port=5432;");
         }
 
     }

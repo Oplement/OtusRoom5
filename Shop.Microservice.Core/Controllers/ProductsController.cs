@@ -38,6 +38,13 @@ namespace Shop.Microservice.Core.Controllers
             return CreatedAtAction(nameof(Get), new { id = createdProduct.Id }, createdProduct);
         }
 
+        [HttpPost("update")]
+        public async Task<IActionResult> Update([FromBody] Product product)
+        {
+            await _productService.UpdateProductAsync(product);
+            return Ok();
+        }
+
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Product product)
         {

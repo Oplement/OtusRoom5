@@ -1,17 +1,14 @@
-﻿@using Shop.Microservice.Domain.Entities;
-@model List<OrderProduct>
+﻿@using Shop.Microservice.Domain.Common;
+@using Shop.Microservice.Domain.Entities;
+@model Product
 @{
     Layout = "_Layout";
-    // Предполагается, что у вас есть модель для товара
-    var title = "Введите название товара"; // Заглушка для названия товара
-    var price = 6754; // Заглушка для цены
 }
 
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Добавление товара</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -75,34 +72,37 @@
     <div class="container">
         <div class="navigation">
             <!-- Навигация -->
-            <button>Orders</button>
             <button>Goods</button>
         </div>
 
         <div class="main-content">
             <!-- Форма для добавления товара -->
-            <form method="post" enctype="multipart/form-data">
-                <label for="title">Title of good:</label>
-                <input type="text" id="title" name="title" value="@title" />
+            <form action="/goods/update" method="post">
+                <input hidden="hidden" id="idp" name="id" value="@Model.Id" />
 
-                <label for="price">Price:</label>
-                <input type="number" id="price" name="price" value="@price" />
+                <label for="title">Название товара:</label>
+                <input type="text" id="title" name="title" value="@Model.Title" />
 
-                <label for="description">Description of good:</label>
-                <textarea id="description" name="description">Введите описание товара</textarea>
+                <label for="price">Цена:</label>
+                <input type="number" id="price" name="price" value="@Model.Price" />
 
-                <label for="image">Image:</label>
-                <input type="file" id="image" name="image" />
+                <label for="description">Описание товара:</label>
+                <textarea id="description" name="description">@Model.Description</textarea>
+
+                <label for="description">Кол-во товара:</label>
+                <textarea id="count" name="count">@Model.Count</textarea>
+         
+                <label for="image">Картинка товара:</label>
+                <input hidden="hidden" id="image" name="image" value="@Model.Image"/>
 
                 <input type="submit" value="Save" />
             </form>
+            <form method="post">
+                <img src="@Model.Image" style="width:100px; height:100px;" />
+                <input type="file" id="image" name="image" />
+            </form>
         </div>
 
-        <div class="admin-panel">
-            <!-- Панель администратора -->
-            <img src="path-to-admin-photo.jpg" alt="Photo" />
-            <span>Administrator</span>
-        </div>
     </div>
 </body>
 </html>
