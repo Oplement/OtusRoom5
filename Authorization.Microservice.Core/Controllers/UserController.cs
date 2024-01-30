@@ -18,6 +18,8 @@ namespace Authorization.Microservice.Core.Controllers
         {
             _service = service;
         }
+
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
