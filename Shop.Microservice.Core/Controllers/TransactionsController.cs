@@ -40,7 +40,7 @@ namespace Shop.Microservice.Core.Controllers
             {
                 Amount = Int64.Parse(data.Amount),
                 SenderID = data.UserId,
-                TimeStamp = DateTime.UtcNow,
+                TimeStamp = DateTime.Now,
                 ReceiverID = data.ReceiverId, 
                 Comment = data.Comment,
             };

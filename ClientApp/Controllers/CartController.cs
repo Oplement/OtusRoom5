@@ -55,7 +55,7 @@ namespace ClientApp.Controllers
             
             _requestService.SendPost(service, $"api/orders/ordercart", orderid, this.HttpContext);
 
-            _requestService.SendPost(service, $"api/Rabbitmq", new { content = $"Статус вашего заказа изменен на ()", topic = "Изменение статуса заказа", userName = HttpContext.Items["username"], email = HttpContext.Items["email"]} , this.HttpContext);
+            _requestService.SendPost(service, $"api/Rabbitmq", new { content = $"Статус вашего заказа изменен на < В работе >' ", topic = "Изменение статуса заказа", userName = HttpContext.Items["username"], email = HttpContext.Items["email"]} , this.HttpContext);
 
             return Redirect("/mainpage");
         }
