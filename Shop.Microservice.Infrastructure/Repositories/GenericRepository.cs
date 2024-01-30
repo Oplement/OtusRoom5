@@ -2,6 +2,7 @@
 using Shop.Microservice.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Shop.Microservice.Infrastructure.Repositories.Contracts;
+using Authorization.Microservice.Domain;
 
 namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 {
@@ -69,9 +70,6 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         public async Task<List<Order>> GetOrders(Guid userid)
         {
              var orders =_databaseContext.Orders.Include(m => m.OrderProducts).ThenInclude(m=>m.Product).Where(x => x.UserId == userid).ToList();
-             
-
-
 
             return orders;
         }
@@ -104,7 +102,14 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             await Save();
         }
+        public async Task UpdateOrderStatus(Guid id, string status)
+        {
+            var order = _databaseContext.Orders.FirstOrDefault(m => m.Id == id);
+            order.OrderStatus =  (OrderStatus)Enum.Parse(typeof(OrderStatus), status);
+          
 
+            await Save();
+        }
         public async Task<List<OrderProduct>> PutToCart(Guid userid, Guid productid)
         {
             var id = await GetCartOrderByUserId(userid);

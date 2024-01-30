@@ -55,7 +55,14 @@ namespace Shop.Microservice.Core.Controllers
             
             return Ok();
         }
+        [HttpPost("updatestatus")]
+        public async Task<IActionResult> OrderCart([FromBody] UpdateOrderStatusModel order)
+        {
 
+            await _orderService.UpdateOrderStatus(order.Id, order.Status);
+
+            return Ok();
+        }
         [HttpPost("removeorderproduct")]
         public async Task<IActionResult> OrderCart([FromBody] OrderCartModel orderproduct)
         {
