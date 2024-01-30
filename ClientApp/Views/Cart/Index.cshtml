@@ -54,7 +54,7 @@
     var finalprice = 0;
 }
 
-<form method="post" action="/ordercart">
+<form method="post" id="form2" action="/ordercart">
 
 <input hidden="hidden" name="orderid" class="orderid" value="@Model.FirstOrDefault()?.OrderId"/>
 <div class="cart-list" id="cart-list">
@@ -81,11 +81,19 @@
 
 <div>
   
-    <button type="submit" class="checkout-btn">Оформить заказ</button>
+    <button type="button" onclick="checkForm()" class="checkout-btn">Оформить заказ</button>
 </div>
 </form>
 <div id="pagination"></div>
 <script>
+    function checkForm(){
+        var ost = document.getElementById('balance1').innerHTML;
+        if(ost < @finalprice){
+            alert('Недостаточно средств')
+            return;
+        }
+        document.getElementById('form2').submit();
+    }
     function remove(a,b){
         $.ajax({
             url: '/RemoveOrderProduct?orderid=' + a + '&productid=' + b,
@@ -98,44 +106,3 @@
         });
     }
 </script>
-@*<script>
-
-    const products = JSON.parse('@Html.Raw(Json.Serialize(Model))');
-
-    let currentPage = 1;
-    const itemsPerPage = 3;
-    const totalPages = Math.ceil(products.length / itemsPerPage);
-    console.log(totalPages);
-    console.log(products);
-    function showPage(page) {
-        currentPage = page;
-        const cartList = document.getElementById('cart-list');
-        cartList.innerHTML = '';
-
-        products
-            .slice((page - 1) * itemsPerPage, page * itemsPerPage)
-            .forEach(product => {
-                cartList.innerHTML += `
-                        <div class="cart-item">
-                            <img src="${product.product.image}" alt="Product Image">
-                            <div class="cart-item-details">
-                                <div>${product.product.title}</div>
-                                    <div class="cart-item-price">Price: ${product.product.price}</div>
-                            </div>
-                            <div class="remove-item">&#128465;</div>
-                        </div>
-                    `;
-            });
-    }
-
-    function setupPagination() {
-        const paginationDiv = document.getElementById('pagination');
-        for (let i = 1; i <= totalPages; i++) {
-            paginationDiv.innerHTML += `<button onclick="showPage(${i})">${i}</button>`;
-        }
-    }
-
-    // Инициализация страницы и пагинации
-    setupPagination();
-    showPage(currentPage);
-</script>*@

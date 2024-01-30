@@ -26,7 +26,10 @@ namespace Shop.Microservice.Infrastructure.Services
         {
             return await _repository.Get(id);
         }
-
+        public async Task<Balance> GetBalance(Guid userid)
+        {
+            return await _repository.GetBalance(userid);
+        }
         public async Task<Balance> CreateBalanceAsync(Balance balance)
         {
             return await _repository.Create(balance);

@@ -27,7 +27,7 @@ namespace Shop.Microservice.Core.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            var balance = await _balanceService.GetBalanceByIdAsync(id);
+            var balance = await _balanceService.GetBalance(id);
             if (balance == null) return NotFound();
             return Ok(balance);
         }

@@ -3,6 +3,7 @@ using ClientApp;
 using ClientApp.Middlewares;
 using ClientApp.Services;
 using Microsoft.AspNetCore.Identity;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,8 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddTransient<JsonService>();
 builder.Services.AddTransient<RequestService>();
 
-builder.Services.AddControllers();
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllers().AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+}); 
+builder.Services.AddControllersWithViews().AddJsonOptions(options => {
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

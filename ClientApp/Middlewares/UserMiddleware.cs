@@ -19,6 +19,7 @@ namespace ClientApp.Middlewares
             var response = _requestService.SendGet
                 (MicroserviceDictionary.GetMicroserviceAdress("Authorization"), "auth/getUserInfo", context);
 
+           
             // если пользователь забрался по токену успешно то все норм
             if (response.success )
             {
@@ -27,8 +28,17 @@ namespace ClientApp.Middlewares
                 context.Items.Add("username", user.username);
                 context.Items.Add("role", user.role);
                 context.Items.Add("userphoto", user.userphoto);
-                context.Items.Add("balance", 10);
-                context.Items.Add("forSend", 20);
+
+                
+                var responseBalance = _requestService.SendGet
+              (MicroserviceDictionary.GetMicroserviceAdress("Shop"), $"api/balances/{user.id}", context);
+                if (responseBalance.success)
+                {
+                    var balance = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(responseBalance.result.ToString());
+                    context.Items.Add("balance", balance.amount);
+                    context.Items.Add("forSend", balance.amountForSend);
+                }
+               
             }// если не забрался, то кидаем на авторизацию
             else if(!context.Request.Path.Value.Contains("auth"))
             {

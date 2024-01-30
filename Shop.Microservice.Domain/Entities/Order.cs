@@ -7,8 +7,7 @@ namespace Shop.Microservice.Domain.Entities
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
 
-        //public List<Product> Products { get; set; }
-
+        public List<OrderProduct> OrderProducts { get; set; }   
         public OrderStatus OrderStatus { get; set; }
         public DateTime CreateAt { get; set; }
     }

@@ -49,7 +49,7 @@ namespace Authorization.Microservice.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
 
                     b.HasData(
                         new
@@ -60,6 +60,15 @@ namespace Authorization.Microservice.Infrastructure.Migrations
                             PasswordHash = "473287f8298dba7163a897908958f7c0eae733e25d2e027992ea2edc9bed2fa8",
                             Role = "user",
                             Username = "Andrey Glazev"
+                        },
+                        new
+                        {
+                            Id = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e"),
+                            Email = "c@mail.ru",
+                            ImagePath = "/content/avatars/35a44d12-42f9-4254-a7d3-2e3bf26c934c.jpg",
+                            PasswordHash = "473287f8298dba7163a897908958f7c0eae733e25d2e027992ea2edc9bed2fa8",
+                            Role = "user",
+                            Username = "Ivan Petrov"
                         },
                         new
                         {

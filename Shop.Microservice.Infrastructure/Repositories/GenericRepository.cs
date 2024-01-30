@@ -43,7 +43,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         }
         public async Task<Guid> GetCartOrderByUserId(Guid userid)
         {
-            var order = _databaseContext.Orders.FirstOrDefault(m => m.UserId == userid && m.OrderStatus == OrderStatus.InCart);
+            var order = _databaseContext.Orders.Include(m=>m.OrderProducts).FirstOrDefault(m => m.UserId == userid && m.OrderStatus == OrderStatus.InCart);
             var id = new Guid();
             if (order == null)
             {
@@ -59,25 +59,21 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             return id;
         }
+
+        public async Task<Balance> GetBalance(Guid userid)
+        {
+            var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId ==  userid);
+
+            return balance;
+        }
         public async Task<List<OrderProduct>> GetOrders(Guid userid)
         {
-            var order = _databaseContext.Orders.FirstOrDefault(m => m.UserId == userid);
-            var id = new Guid();
-            if (order == null)
-            {
-                var data = new Order() { CreateAt = DateTime.UtcNow, OrderStatus = OrderStatus.InCart, UserId = userid };
-                _databaseContext.Orders.Add(data);
-                _databaseContext.SaveChanges();
-                id = data.Id;
-            }
-            else
-            {
-                id = order.Id;
-            }
+            var df = _databaseContext.Orders.Include(m => m.OrderProducts).Where(x => x.UserId == userid);
+             
 
-            var orders = _databaseContext.OrderProducts.Include(m => m.Product).Where(m => m.OrderId == id).ToList();
 
-            return orders;
+
+            return new List<OrderProduct>();
         }
         public async Task<List<OrderProduct>> GetCart(Guid userid)
         {
@@ -126,9 +122,23 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
         public async Task OrderCart(Guid orderid)
         {
-            var order = _databaseContext.Orders.FirstOrDefault(m => m.Id == orderid);
+            var order = _databaseContext.Orders.Include(m=>m.OrderProducts).ThenInclude(m=>m.Product).FirstOrDefault(m => m.Id == orderid);
             order.OrderStatus = OrderStatus.InProgress;
+
+
+            var sum = 0;
+
+            foreach (var item in order.OrderProducts)
+            {
+                sum += item.Count * item.Product.Price;
+            }
+            
+            var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId == order.UserId);
+            balance.Amount -= sum;
+
             await _databaseContext.SaveChangesAsync();
+
+
         }
 
         public async Task RemoveOrderProduct(Guid orderid, Guid productid)
