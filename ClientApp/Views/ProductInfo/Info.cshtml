@@ -1,0 +1,49 @@
+﻿@using Shop.Microservice.Domain.Common
+@using Shop.Microservice.Domain.Entities
+@model Product
+@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .product-info {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+            .product-info img {
+                max-width: 100px;
+                max-height: 100px;
+                margin-bottom: 10px;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="product-info">
+            <img src="@Model.Image" alt="Product Image" />
+            <h2>@Model.Title</h2>
+            <p>Цена: @Model.Price</p>
+            <p>Описание: @Model.Description</p>
+            <p>Количество: @Model.Count</p>
+        </div>
+    </div>
+</body>
+</html>
