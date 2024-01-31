@@ -1,13 +1,13 @@
 ﻿@using ClientApp.Controllers;
 @using Shop.Microservice.Domain.Entities;
 @model Dictionary<string, List<Order>>;
+
 @{
     Layout = "_Layout";
 }
 
-
 <style>
-    .users_container {
+    .history_container {
         background-color: #ACC8FF;
         width: contain;
         height: contain;
@@ -17,10 +17,10 @@
         border-radius: 5px;
     }
 
-    .user {
+    .order {
     }
 
-    .summary_users {
+    .summary_orders {
         font-size: 1.5em;
         position: relative;
         cursor: pointer;
@@ -39,39 +39,37 @@
     }
 </style>
 
-
 <div class="history_container">
     @foreach (var dict in Model)
     {
         var user = dict.Key;
+        
 
         @foreach (var order in dict.Value)
         {
             <div class="order">
                 <details>
                     <summary class="summary_orders">
-                        <div>Заказ @order.Id от @order.CreateAt</div>
-                        <div>Пользователь: @user</div>
-                        <div>Статус: @order.OrderStatus</div>
+                        <div>Заказ @order.Id от Пользователя: @user @order.CreateAt</div>
+                        <div>Статус: @Html.DisplayTextFor(orderStatus => order.OrderStatus)</div>
                     </summary>
-                  @{
-                      foreach (var prod in order.OrderProducts)
+                    @{
+                        foreach (var prod in order.OrderProducts)
                         {
+                            var sum = prod.Product.Price * prod.Count;
                             <div class="item">
-                                <p><a href="#"><img src=@prod.Product.Image alt="Image" style="width:180px; height:180px;"></a></p>
+                                <p><a href="ссылка на товар"><img src=@prod.Product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
                                 <div>@prod.Product.Title</div>
                                 <div>Цена: @prod.Product.Price</div>
                                 <div>Количество: @prod.Count</div>
-                                <div><b>Сумма: @prod.Product.Price * @prod.Count</b></div>
+                                <div><b>Сумма: @sum</b></div>
                             </div>
                         }
-                  }
+                    }
                 </details>
             </div>
         }
-        
-      
+
+
     }
 </div>
-
-
