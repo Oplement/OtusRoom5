@@ -95,7 +95,8 @@ namespace Authorization.Microservice.Core.Controllers
                 id = user?.Id,
                 userphoto = user?.ImagePath,
                 username = username.Value,
-                role = role.Value
+                role = role.Value,
+                email = email.Value,
             };
 
             return Ok(response);

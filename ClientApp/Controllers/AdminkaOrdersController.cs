@@ -1,7 +1,9 @@
 ﻿using Authorization.Microservice.Domain;
 using ClientApp.Models;
 using ClientApp.Services;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Domain.Entities;
 
 namespace ClientApp.Controllers
@@ -10,78 +12,61 @@ namespace ClientApp.Controllers
     [Route("[controller]")]
     public class AdminkaOrdersController : Controller
     {
-        RequestService _requestService;
-        public AdminkaOrdersController(RequestService requestService) 
+        private readonly RequestService _requestService;
+
+        public AdminkaOrdersController(RequestService requestService)
         {
             _requestService = requestService;
         }
 
-        [HttpGet("AllOrders")]
-        public IActionResult AllOrders()
+        [HttpPost("updateStatus")]
+        public async Task<IActionResult> UpdateOrderStatus([FromForm] Guid orderid, [FromForm] string status)
         {
-            string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-            ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders/all", this.HttpContext);
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+            ResponseModel response = _requestService.SendPost(service, "api/orders/updatestatus", new { id = orderid, status = status }, this.HttpContext);
 
-            var orders = new List<Order>();
-
-            if (response.success)
-            {
-                orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
-            }
-
-            return View(orders);
+            return Redirect("AllOrdersWithDetails");
         }
-        public async Task<Dictionary<Guid, string>> GetUserNames()
+
+        [HttpGet("AllOrdersWithDetails")]
+        public async Task<IActionResult> AllOrdersWithDetails()
         {
+            // Получение всех заказов
+            string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            // Отправка запроса к API для получения всех заказов
+            ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders", this.HttpContext);
+
+            // Десериализация ответа в список заказов
+            var orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
+            
+
+            // Получение пользователей
             string authServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Authorization");
-            ResponseModel response = _requestService.SendGet(authServiceAddress, "api/users/all", this.HttpContext);
-
-            var userNames = new Dictionary<Guid, string>();
-
-            if (response.success)
+            ResponseModel usersResponse = _requestService.SendGet(authServiceAddress, "auth/getallusers", this.HttpContext);
+            var users = new List<User>();
+            if (usersResponse.success)
             {
-                var users = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(response.result.ToString());
-                foreach (var user in users)
+                users = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(usersResponse.result.ToString());
+            }
+
+            // Создание списка DTO
+            var dict = new Dictionary<string, List<Order>>();
+
+            foreach (var order in orders)
+            {
+                var user = users.FirstOrDefault(u => u.Id == order.UserId);
+                if (!dict.ContainsKey(user.Email))
                 {
-                    userNames[user.Id] = user.Username;
+                    dict.Add(user.Email, new List<Order>());
                 }
+
+                dict[user.Email].Add(order);
             }
 
-            return userNames;
-        }
-
-        [HttpGet("AllOrdersWithUsers")]
-        public async Task<IActionResult> AllOrdersWithUsers()
-        {
-            var orders = GetAllOrders();
-            var userNames = await GetUserNames();
-
-            var ordersWithUsers = orders.Select(order => new OrderWithUserDto
-            {
-                Order = order,
-                UserName = userNames.ContainsKey(order.UserId) ? userNames[order.UserId] : "Неизвестный пользователь"
-            }).ToList();
-
-            return View(ordersWithUsers);
-        }
-
-        public List<Order> GetAllOrders()
-        {
-            string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-            ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders/all", this.HttpContext);
-
-            if (response.success)
-            {
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
-            }
-
-            return new List<Order>();
+            return View(dict);
         }
 
     }
-    public class OrderWithUserDto
-    {
-        public Order Order { get; set; }
-        public string UserName { get; set; }
-    }
+
 }

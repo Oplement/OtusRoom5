@@ -24,7 +24,8 @@ namespace ClientApp.Middlewares
             if (response.success )
             {
                 var user = Newtonsoft.Json.JsonConvert.DeserializeObject<dynamic>(response.result.ToString());
-                context.Items.Add("userid", user.id);
+                context.Items.Add("userid", user.id); 
+                context.Items.Add("email", user.email);
                 context.Items.Add("username", user.username);
                 context.Items.Add("role", user.role);
                 context.Items.Add("userphoto", user.userphoto);

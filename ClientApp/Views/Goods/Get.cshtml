@@ -1,0 +1,109 @@
+﻿@using Shop.Microservice.Domain.Common;
+@using Shop.Microservice.Domain.Entities;
+@model Product
+@{
+    Layout = "_Layout";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .navigation {
+            margin-bottom: 20px;
+        }
+
+            .navigation button {
+                margin-right: 5px;
+            }
+
+        .main-content {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+            .main-content form > label {
+                display: block;
+                margin-top: 10px;
+            }
+
+            .main-content form > input,
+            .main-content form > textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+            }
+
+                .main-content form > input[type="submit"] {
+                    margin-top: 10px;
+                    padding: 10px 20px;
+                    background-color: #5cb85c;
+                    color: white;
+                    border: none;
+                    cursor: pointer;
+                }
+
+        .admin-panel {
+            text-align: center;
+        }
+
+            .admin-panel img {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <!-- Навигация -->
+            <button>Goods</button>
+        </div>
+
+        <div class="main-content">
+            <!-- Форма для добавления товара -->
+            <form action="/goods/update" method="post">
+                <input hidden="hidden" id="idp" name="id" value="@Model.Id" />
+
+                <label for="title">Название товара:</label>
+                <input type="text" id="title" name="title" value="@Model.Title" />
+
+                <label for="price">Цена:</label>
+                <input type="number" id="price" name="price" value="@Model.Price" />
+
+                <label for="description">Описание товара:</label>
+                <textarea id="description" name="description">@Model.Description</textarea>
+
+                <label for="description">Кол-во товара:</label>
+                <textarea id="count" name="count">@Model.Count</textarea>
+         
+                <label for="image">Картинка товара:</label>
+                <input hidden="hidden" id="image" name="image" value="@Model.Image"/>
+
+                <input type="submit" value="Save" />
+            </form>
+            <form method="post">
+                <img src="@Model.Image" style="width:100px; height:100px;" />
+                <input type="file" id="image" name="image" />
+            </form>
+        </div>
+
+    </div>
+</body>
+</html>
+

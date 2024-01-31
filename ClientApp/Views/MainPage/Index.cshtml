@@ -7,12 +7,14 @@
 <style>
     .products-list{
         background-color: #ACC8FF;
-        width:90%;
-        height:80%;
-        margin: 30px auto;
+        width:contain;
+        height:contain;
+        margin: 4%;
+        padding: 60px;
         display:flex;
         flex-wrap : wrap;
         border-radius: 8px;
+
     }
     .product {
         margin-left:9%;
@@ -81,12 +83,10 @@
                      @{if(Context.Items["role"]?.ToString() == "admin")
                         {
                             <div style="display:flex">
-                              <form action="mainpage/patch" method="post">
-                              <input hidden="hidden" name="id" class="id" value="@product.Id"/>
-                                <button type="submit">
+                           
+                                <button type="button" onclick="window.location.href='/goods/get/@product.Id'">
                                     <img src="https://avatars.mds.yandex.net/i?id=47f36a9c1da0cf4123663b5b8bd53e1652c91cf0-6996969-images-thumbs&n=13" style="width:20px;height:20px" alt="buttonpng" border="0" />
                                 </button>
-                              </form>
 
                               <form action="mainpage/delete" method="post" style="padding-left:20px">
                                                             <input hidden="hidden" name="id" class="id" value="@product.Id"/>

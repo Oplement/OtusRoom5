@@ -51,7 +51,7 @@ namespace Shop.Microservice.Infrastructure
             };
           
             var order = new Order() 
-            {Id = Guid.NewGuid(), OrderStatus=OrderStatus.InCart,CreateAt=DateTime.UtcNow,UserId= Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e") };
+            {Id = Guid.NewGuid(), OrderStatus=OrderStatus.InCart,CreateAt=DateTime.Now,UserId= Guid.Parse("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e") };
             var orderProduct = new OrderProduct()
             {Id = Guid.NewGuid(), Count = 1,OrderId=order.Id,ProductId=products.First().Id};
 
@@ -65,7 +65,7 @@ namespace Shop.Microservice.Infrastructure
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.EnableSensitiveDataLogging();
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=otus_glazev_test;Port=5432;");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=1234;Database=postgres;Port=5433;");
         }
 
     }

@@ -54,7 +54,7 @@ namespace Authorization.Microservice.Infrastructure
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=otus_glazev_test;Port=5432;");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=1234;Database=postgres;Port=5433;");
         }
 
     }

@@ -1,5 +1,5 @@
 ﻿@using Shop.Microservice.Domain.Entities;
-@model List<OrderProduct>
+@model List<Order>
 @{
     Layout = "_Layout";
 }
@@ -41,22 +41,37 @@
 <div class="history_container">
     @for (int i = 0; i < Model.Count; i++)
     {
-        var orderProduct = Model[i];
+        var order = Model[i];
 
         <div class="order">
             <details>
                 <summary class="summary_orders">
-                    <div>Заказ от @orderProduct.Order.CreateAt.ToString("g")</div> 
-                    <div>Статус: @orderProduct.Order.OrderStatus</div>
+                    <div>Заказ от @order.CreateAt.ToString("g")</div> 
+                    <div>Статус: @Html.DisplayTextFor(orderStatus => order.OrderStatus)</div> 
                 </summary>
-                <div class="item">
-                    <p><a href="ссылка на товар"><img src=@orderProduct.Product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
-                    <div class="title_item">@orderProduct.Product.Title</div>
-                    <div class="price">Цена: @orderProduct.Product.Price</div>
-                </div>
+                @{
+                    var finalprice = 0;
+
+                    foreach (var product in order.OrderProducts)
+                    {
+                        <div class="item">
+                            <p><a href="ссылка на товар"><img src=@product.Product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                            <div class="title_item">@product.Product.Title</div>
+                            <div>@product.Count шт.</div>
+                            <div class="price">Цена: @product.Product.Price</div>
+                            @{
+                                var price = product.Product.Price * product.Count; finalprice += price;
+                            }
+                            <div class="items-price">Общая стоимость: @price</div>
+                        </div>
+                    }
+                }
+                <div class="item">Сумма заказа: @finalprice</div>
+             
             </details>
         </div>
     }
+
 
 </div> 
 

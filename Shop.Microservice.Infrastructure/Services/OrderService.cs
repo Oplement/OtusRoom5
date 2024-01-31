@@ -19,14 +19,14 @@ namespace Shop.Microservice.Infrastructure.Services
 
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
         {
-            return await _repository.GetAll();
+            return await _repository.GetAllOrders();
         }
 
         public async Task<Order> GetOrderByIdAsync(Guid id)
         {
             return await _repository.Get(id);
         }
-        public async Task<List<OrderProduct>> GetOrders(Guid userid)
+        public async Task<List<Order>> GetOrders(Guid userid)
         {
             return await _repository.GetOrders(userid);
         }
@@ -56,6 +56,11 @@ namespace Shop.Microservice.Infrastructure.Services
         public async Task UpdateOrderAsync(Order order)
         {
             await _repository.Update(order);
+        }
+        public async Task UpdateOrderStatus(Guid id, string status)
+        {
+
+            await _repository.UpdateOrderStatus(id, status);
         }
 
         public async Task DeleteOrderAsync(Guid id)

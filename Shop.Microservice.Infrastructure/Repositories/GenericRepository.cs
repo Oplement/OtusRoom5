@@ -2,6 +2,7 @@
 using Shop.Microservice.Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Shop.Microservice.Infrastructure.Repositories.Contracts;
+using Authorization.Microservice.Domain;
 
 namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 {
@@ -47,7 +48,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
             var id = new Guid();
             if (order == null)
             {
-                var data = new Order() { CreateAt = DateTime.UtcNow, OrderStatus = OrderStatus.InCart, UserId = userid };
+                var data = new Order() { CreateAt = DateTime.Now, OrderStatus = OrderStatus.InCart, UserId = userid };
                 _databaseContext.Orders.Add(data);
                 _databaseContext.SaveChanges();
                 id = data.Id;
@@ -66,14 +67,11 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             return balance;
         }
-        public async Task<List<OrderProduct>> GetOrders(Guid userid)
+        public async Task<List<Order>> GetOrders(Guid userid)
         {
-            var df = _databaseContext.Orders.Include(m => m.OrderProducts).Where(x => x.UserId == userid);
-             
+             var orders =_databaseContext.Orders.Include(m => m.OrderProducts).ThenInclude(m=>m.Product).Where(x => x.UserId == userid).ToList();
 
-
-
-            return new List<OrderProduct>();
+            return orders;
         }
         public async Task<List<OrderProduct>> GetCart(Guid userid)
         {
@@ -88,7 +86,11 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             return await _databaseContext.Set<T>().ToListAsync();
         }
-
+        public async Task<List<Order>> GetAllOrders()
+        {
+            var orders = await _databaseContext.Orders.Include(m => m.OrderProducts).ThenInclude(_ => _.Product).ToListAsync();
+            return orders;
+        }
         public async Task Save()
         {
             await _databaseContext.SaveChangesAsync();
@@ -100,7 +102,14 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             await Save();
         }
+        public async Task UpdateOrderStatus(Guid id, string status)
+        {
+            var order = _databaseContext.Orders.FirstOrDefault(m => m.Id == id);
+            order.OrderStatus =  (OrderStatus)Enum.Parse(typeof(OrderStatus), status);
+          
 
+            await Save();
+        }
         public async Task<List<OrderProduct>> PutToCart(Guid userid, Guid productid)
         {
             var id = await GetCartOrderByUserId(userid);
@@ -124,16 +133,17 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
         {
             var order = _databaseContext.Orders.Include(m=>m.OrderProducts).ThenInclude(m=>m.Product).FirstOrDefault(m => m.Id == orderid);
             order.OrderStatus = OrderStatus.InProgress;
-
-
+            order.CreateAt = DateTime.Now;
             var sum = 0;
 
             foreach (var item in order.OrderProducts)
             {
                 sum += item.Count * item.Product.Price;
+                var prod = await _databaseContext.Products.FirstOrDefaultAsync(m => m.Id == item.ProductId);
+                prod.Count -= item.Count;
             }
             
-            var balance = _databaseContext.Balances.FirstOrDefault(m=>m.UserId == order.UserId);
+            var balance = await _databaseContext.Balances.FirstOrDefaultAsync(m=>m.UserId == order.UserId);
             balance.Amount -= sum;
 
             await _databaseContext.SaveChangesAsync();
@@ -143,7 +153,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
         public async Task RemoveOrderProduct(Guid orderid, Guid productid)
         {
-            var orderProduct = _databaseContext.OrderProducts.FirstOrDefault(m => m.OrderId == orderid && m.ProductId == productid);
+            var orderProduct = await _databaseContext.OrderProducts.FirstOrDefaultAsync(m => m.OrderId == orderid && m.ProductId == productid);
             _databaseContext.OrderProducts.Remove(orderProduct);
 
             await _databaseContext.SaveChangesAsync();

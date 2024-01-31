@@ -1,0 +1,117 @@
+﻿@using ClientApp.Controllers;
+@using Shop.Microservice.Domain.Entities;
+@model Dictionary<string, List<Order>>;
+
+@{
+    Layout = "_Layout";
+}
+
+<style>
+    .history_container {
+        background-color: #ACC8FF;
+        width: contain;
+        height: contain;
+        position: relative;
+        padding: 10px;
+        margin: 30px;
+        border-radius: 5px;
+    }
+
+    .order {
+    }
+
+    .summary_orders {
+        font-size: 1.5em;
+        position: relative;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        font-size: 1.5em;
+    }
+</style>
+
+<script>
+    function checkSelect(status, i){
+        console.log(status + ' ' + i);
+        if (status == "Issued"){
+
+            document.getElementById(i).value = 'Issued';
+
+        }
+        if(status == "InProgress"){
+            document.getElementById(i).value = 'InProgress';
+
+        }
+        if (status == "Canceled"){
+
+            document.getElementById(i).value = 'Canceled';
+
+        }
+    }
+</script>
+
+<div class="history_container">
+    @{
+        int i = 0;
+    }
+    @foreach (var dict in Model)
+    {
+        var user = dict.Key;
+       
+        @foreach (var order in dict.Value)
+        {
+            <div class="order">
+                <details>
+                    <summary class="summary_orders">
+                        <form method="post" action="/adminkaorders/updateStatus">
+                            <input hidden="hidden" name="orderid" id="orderid" value="@order.Id" />
+                        <div>Заказ: @order.Id . Дата последнего изменения: @order.CreateAt</div>
+                        <div>Пользователь: @user</div>
+                        <lavel>Статус:</lavel>
+                       @{var stat = "status_" + i;}
+                            <select name="status" id="@stat">
+                                <option value="InProgress">В работе</option>
+                                <option value="Canceled">Отменен</option>
+                                <option value="Issued">Выдан</option>
+                                </select>
+                                <script>checkSelect('@order.OrderStatus', '@stat')</script>
+                            <button type="submit">
+                                <img style="width:20px;height:20px;" src="~/content/icons/save.svg"/>
+                            </button>
+                        </form>
+                    </summary>
+                    @{
+                        
+                        foreach (var prod in order.OrderProducts)
+                        {
+                            <div class="item">
+                                <p><a href="#"><img src=@prod.Product.Image alt="Image" style="width:180px; height:180px;"></a></p>
+                                <div>@prod.Product.Title</div>
+                                <div>Цена: @prod.Product.Price</div>
+                                <div>Количество: @prod.Count</div>
+                                @{
+                                    var sum = prod.Product.Price * prod.Count;
+                                }
+                                <div><b>Сумма: @sum</b></div>
+                            </div>
+                        }
+                        i++;
+                  }
+                </details>
+            </div>
+        }
+        
+      
+    }
+</div>
+
+
