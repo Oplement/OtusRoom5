@@ -42,9 +42,6 @@ namespace Shop.Microservice.Infrastructure
                 new Product(){ Count=55, Title = "Футболка", Price = 899, Description = "10000мАч", Id =  Guid.NewGuid(), Image="https://galagraffity.ru/image/cache/catalog/XML341ae4b41effce6e99b3170a951e6dc7/futbolki/IMGec5d5e1c4a114ecba74c0557231a0d43-767x767.jpg" },
 
                 new Product(){ Count=55, Title = "Шарф", Price = 799, Description = "Шарф", Id =  Guid.NewGuid(), Image="https://bis-souvenir.ru/wp-content/uploads/2021/01/6901992-th-img.jpg" },
-
-
-
             };
 
 
@@ -77,7 +74,7 @@ namespace Shop.Microservice.Infrastructure
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=postgres;Port=5432;");
+            optionsBuilder.UseNpgsql("Host=localhost;Username=postgres;Password=123123;Database=OTUS_SHOP;Port=5432;");
         }
 
     }
