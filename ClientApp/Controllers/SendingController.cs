@@ -38,7 +38,7 @@ namespace ClientApp.Controllers
 
 
             // create transaction
-            var response = _requestService.SendPost(MicroserviceDictionary.GetMicroserviceAdress("Shop"),
+            _requestService.SendPost(MicroserviceDictionary.GetMicroserviceAdress("Shop"),
           "api/transactions/post", new {comment = comment, receiverid = toID, amount = amount, userid = this.HttpContext.Items["userid"].ToString() }, this.HttpContext);
            
             return RedirectToAction("Index");

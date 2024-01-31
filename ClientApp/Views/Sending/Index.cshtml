@@ -97,8 +97,11 @@
         }
         document.getElementById('error').hidden = 'hidden';
 
-        var money = document.getElementById('amount').value;
-        var ost = document.getElementById('balance2').innerHTML;
+        var money = parseInt(document.getElementById('amount').value);
+        var ost = parseInt(document.getElementById('balance2').innerHTML);
+        console.log(ost);
+        console.log(money);
+
         if(money <= 0){
             document.getElementById('error').removeAttribute('hidden');
 
@@ -106,6 +109,7 @@
             return;
         }
         if(ost < money){
+            console.log('sd')
             document.getElementById('error').removeAttribute('hidden');
 
             document.getElementById('error').innerHTML = 'Сумма больше чем доступно для отправки';
@@ -119,7 +123,7 @@
 
     <form method="post"  action="/sending/send" class="form" id="form1">
         <div class="form-group">
-        <label id="error" hidden="hidden"></label>
+        <label id="error" style="color:darkred" hidden="hidden"></label>
             <br />
             <br/>
         <label for="recipient" class="labels">Кому:</label>

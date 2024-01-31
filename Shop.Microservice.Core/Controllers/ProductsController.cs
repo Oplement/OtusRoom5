@@ -44,7 +44,12 @@ namespace Shop.Microservice.Core.Controllers
             await _productService.UpdateProductAsync(product);
             return Ok();
         }
-
+        [HttpPost("updatePhoto")]
+        public async Task<IActionResult> UpdatePhoto([FromBody] UpdatePhotoModel product)
+        {
+            await _productService.UpdateProductPhotoAsync(product.Id, product.Path);
+            return Ok();
+        }
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(Guid id, [FromBody] Product product)
         {

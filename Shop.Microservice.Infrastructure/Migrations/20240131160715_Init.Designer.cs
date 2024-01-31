@@ -12,8 +12,8 @@ using Shop.Microservice.Infrastructure;
 namespace Shop.Microservice.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20240110174447_INIT")]
-    partial class INIT
+    [Migration("20240131160715_Init")]
+    partial class Init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -43,6 +43,22 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Balances");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("487f7e43-9fbb-42c8-b8e7-a56ccf572bcc"),
+                            Amount = 10.0,
+                            AmountForSend = 100.0,
+                            UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
+                        },
+                        new
+                        {
+                            Id = new Guid("bcd0b45e-569e-4ade-a45e-2286db67dfbd"),
+                            Amount = 20.0,
+                            AmountForSend = 200.0,
+                            UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e")
+                        });
                 });
 
             modelBuilder.Entity("Shop.Microservice.Domain.Common.Product", b =>
@@ -76,8 +92,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("abf270ef-cbe0-46c0-99a7-88c27afbba7c"),
-                            Count = 2,
+                            Id = new Guid("4ff2c5a6-f9a9-40fa-ae10-525ddb3abb7b"),
+                            Count = 15,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
                             Price = 5999,
@@ -85,8 +101,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("9cfc38b6-1d6f-4084-b2ce-bc7bf42773ee"),
-                            Count = 5,
+                            Id = new Guid("81563215-874f-4da2-b171-30da3713d8af"),
+                            Count = 75,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
                             Price = 2399,
@@ -94,75 +110,75 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c8771de7-edb5-4dd5-875a-08ad162cde6f"),
-                            Count = 2,
-                            Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
+                            Id = new Guid("9bcfc253-0654-4d95-a5b9-e58a9cb9345b"),
+                            Count = 34,
+                            Description = "Отличный подарок",
+                            Image = "https://praktika-reklama.ru/images/stories/virtuemart/product/3146.40_1_tif_1000x1000.jpg",
+                            Price = 1999,
+                            Title = "Термокружка"
+                        },
+                        new
+                        {
+                            Id = new Guid("89c77a2b-52a9-4c53-8757-39802504062f"),
+                            Count = 75,
+                            Description = "Флешка на 64 гб",
+                            Image = "https://chel.sp-computer.ru/upload/iblock/dd0/dd0d7bdff13a3c31afd2f39080d7f0a2.jpg",
+                            Price = 799,
+                            Title = "Флешка 64gb"
+                        },
+                        new
+                        {
+                            Id = new Guid("99fbb82c-554c-48e6-9f62-ee189c5e874f"),
+                            Count = 12,
+                            Description = "Овечья шерсть",
+                            Image = "https://paters.ru/files/catalog/o_3545.jpg",
                             Price = 5999,
-                            Title = "Худи"
+                            Title = "Плед красный"
                         },
                         new
                         {
-                            Id = new Guid("81131536-68ff-4624-a1ba-dc3d93fb69a0"),
-                            Count = 5,
-                            Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
+                            Id = new Guid("3159a88c-d0fa-4ff0-b9c6-b03abac79c33"),
+                            Count = 34,
+                            Description = "Хороший рюкзак",
+                            Image = "https://illan-gifts.ru/api/images/riukzak-molti-base-seryj-818385.jpeg",
                             Price = 2399,
-                            Title = "ПоверБанк"
+                            Title = "Рюкзак"
                         },
                         new
                         {
-                            Id = new Guid("ac9e9779-82de-42a7-8556-01a1fd2705b2"),
-                            Count = 2,
+                            Id = new Guid("a46b9246-7e14-4709-9d15-0e8d3534f130"),
+                            Count = 52,
+                            Description = "Зимние перчатки",
+                            Image = "https://a.allegroimg.com/original/115466/f37055214459bfdcb1252f470363/Rekawice-meskie-polarowe-zimowe-rekawiczki-L-XL",
+                            Price = 1199,
+                            Title = "Перчатки"
+                        },
+                        new
+                        {
+                            Id = new Guid("d1435cfd-b383-4924-8e28-ab3131894a38"),
+                            Count = 21,
                             Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
-                            Price = 5999,
-                            Title = "Худи"
+                            Image = "https://cdn1.ozone.ru/s3/multimedia-g/6049217164.jpg",
+                            Price = 599,
+                            Title = "Носки"
                         },
                         new
                         {
-                            Id = new Guid("ab7ddbcb-3e0e-4979-b685-835038b6c7bc"),
-                            Count = 5,
+                            Id = new Guid("0562856a-47de-4597-870b-0f1a6b213ee6"),
+                            Count = 55,
                             Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
-                            Price = 2399,
-                            Title = "ПоверБанк"
+                            Image = "https://galagraffity.ru/image/cache/catalog/XML341ae4b41effce6e99b3170a951e6dc7/futbolki/IMGec5d5e1c4a114ecba74c0557231a0d43-767x767.jpg",
+                            Price = 899,
+                            Title = "Футболка"
                         },
                         new
                         {
-                            Id = new Guid("869a2674-1dbf-41e6-b964-00d9f3e7c903"),
-                            Count = 2,
-                            Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
-                            Price = 5999,
-                            Title = "Худи"
-                        },
-                        new
-                        {
-                            Id = new Guid("2abe378b-1952-48a5-afad-ff055ac05cc4"),
-                            Count = 5,
-                            Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
-                            Price = 2399,
-                            Title = "ПоверБанк"
-                        },
-                        new
-                        {
-                            Id = new Guid("8e3a0892-9d18-4ca7-be8b-f7485de149ae"),
-                            Count = 2,
-                            Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
-                            Price = 5999,
-                            Title = "Худи"
-                        },
-                        new
-                        {
-                            Id = new Guid("e1628599-5a4c-4768-b8b0-bc10c9421ede"),
-                            Count = 5,
-                            Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
-                            Price = 2399,
-                            Title = "ПоверБанк"
+                            Id = new Guid("ae16ea54-6493-4360-b4bb-86ab94b7431c"),
+                            Count = 55,
+                            Description = "Шарф",
+                            Image = "https://bis-souvenir.ru/wp-content/uploads/2021/01/6901992-th-img.jpg",
+                            Price = 799,
+                            Title = "Шарф"
                         });
                 });
 
@@ -179,14 +195,14 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("ReceiverID")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid>("SenderID")
                         .HasColumnType("uuid");
 
                     b.Property<DateTime>("TimeStamp")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("TransactionStatus")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -211,6 +227,15 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f18e8fa6-1bb2-46c5-8e79-c8264603633c"),
+                            CreateAt = new DateTime(2024, 1, 31, 16, 7, 15, 69, DateTimeKind.Utc).AddTicks(7471),
+                            OrderStatus = 0,
+                            UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
+                        });
                 });
 
             modelBuilder.Entity("Shop.Microservice.Domain.Entities.OrderProduct", b =>
@@ -218,6 +243,9 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer");
 
                     b.Property<Guid>("OrderId")
                         .HasColumnType("uuid");
@@ -232,12 +260,21 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderProducts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("f31503f2-e602-4a5f-826e-ce128357ed1a"),
+                            Count = 1,
+                            OrderId = new Guid("f18e8fa6-1bb2-46c5-8e79-c8264603633c"),
+                            ProductId = new Guid("4ff2c5a6-f9a9-40fa-ae10-525ddb3abb7b")
+                        });
                 });
 
             modelBuilder.Entity("Shop.Microservice.Domain.Entities.OrderProduct", b =>
                 {
                     b.HasOne("Shop.Microservice.Domain.Entities.Order", "Order")
-                        .WithMany()
+                        .WithMany("OrderProducts")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -251,6 +288,11 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Shop.Microservice.Domain.Entities.Order", b =>
+                {
+                    b.Navigation("OrderProducts");
                 });
 #pragma warning restore 612, 618
         }

@@ -44,15 +44,15 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c26e3c4b-a5ae-4271-968c-a1a57281b4c8"),
-                            Amount = 10.0,
+                            Id = new Guid("487f7e43-9fbb-42c8-b8e7-a56ccf572bcc"),
+                            Amount = 10000.0,
                             AmountForSend = 100.0,
                             UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
                         },
                         new
                         {
-                            Id = new Guid("3cb5940e-87f0-4b75-a820-08f17cffada1"),
-                            Amount = 20.0,
+                            Id = new Guid("bcd0b45e-569e-4ade-a45e-2286db67dfbd"),
+                            Amount = 20000.0,
                             AmountForSend = 200.0,
                             UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e")
                         });
@@ -89,8 +89,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8948b2a3-a264-4cb7-8345-646e5e33ca3f"),
-                            Count = 2,
+                            Id = new Guid("4ff2c5a6-f9a9-40fa-ae10-525ddb3abb7b"),
+                            Count = 15,
                             Description = "Размеры S,M,L",
                             Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
                             Price = 5999,
@@ -98,8 +98,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("5405b1c7-b492-4a80-8421-50ac44dea656"),
-                            Count = 5,
+                            Id = new Guid("81563215-874f-4da2-b171-30da3713d8af"),
+                            Count = 75,
                             Description = "10000мАч",
                             Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
                             Price = 2399,
@@ -107,75 +107,75 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         },
                         new
                         {
-                            Id = new Guid("d35d0fc0-f16f-42c2-a34a-3b6a1aec2b1e"),
-                            Count = 2,
-                            Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
+                            Id = new Guid("9bcfc253-0654-4d95-a5b9-e58a9cb9345b"),
+                            Count = 34,
+                            Description = "Отличный подарок",
+                            Image = "https://praktika-reklama.ru/images/stories/virtuemart/product/3146.40_1_tif_1000x1000.jpg",
+                            Price = 1999,
+                            Title = "Термокружка"
+                        },
+                        new
+                        {
+                            Id = new Guid("89c77a2b-52a9-4c53-8757-39802504062f"),
+                            Count = 75,
+                            Description = "Флешка на 64 гб",
+                            Image = "https://chel.sp-computer.ru/upload/iblock/dd0/dd0d7bdff13a3c31afd2f39080d7f0a2.jpg",
+                            Price = 799,
+                            Title = "Флешка 64gb"
+                        },
+                        new
+                        {
+                            Id = new Guid("99fbb82c-554c-48e6-9f62-ee189c5e874f"),
+                            Count = 12,
+                            Description = "Овечья шерсть",
+                            Image = "https://paters.ru/files/catalog/o_3545.jpg",
                             Price = 5999,
-                            Title = "Худи"
+                            Title = "Плед красный"
                         },
                         new
                         {
-                            Id = new Guid("970c38cd-d58b-45f8-9453-f0496b168bb8"),
-                            Count = 5,
-                            Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
+                            Id = new Guid("3159a88c-d0fa-4ff0-b9c6-b03abac79c33"),
+                            Count = 34,
+                            Description = "Хороший рюкзак",
+                            Image = "https://illan-gifts.ru/api/images/riukzak-molti-base-seryj-818385.jpeg",
                             Price = 2399,
-                            Title = "ПоверБанк"
+                            Title = "Рюкзак"
                         },
                         new
                         {
-                            Id = new Guid("f471ef19-1e1e-414a-9494-dbb80c42ed40"),
-                            Count = 2,
+                            Id = new Guid("a46b9246-7e14-4709-9d15-0e8d3534f130"),
+                            Count = 52,
+                            Description = "Зимние перчатки",
+                            Image = "https://a.allegroimg.com/original/115466/f37055214459bfdcb1252f470363/Rekawice-meskie-polarowe-zimowe-rekawiczki-L-XL",
+                            Price = 1199,
+                            Title = "Перчатки"
+                        },
+                        new
+                        {
+                            Id = new Guid("d1435cfd-b383-4924-8e28-ab3131894a38"),
+                            Count = 21,
                             Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
-                            Price = 5999,
-                            Title = "Худи"
+                            Image = "https://cdn1.ozone.ru/s3/multimedia-g/6049217164.jpg",
+                            Price = 599,
+                            Title = "Носки"
                         },
                         new
                         {
-                            Id = new Guid("d437a0dd-699f-4443-8860-33580ffcdbe4"),
-                            Count = 5,
+                            Id = new Guid("0562856a-47de-4597-870b-0f1a6b213ee6"),
+                            Count = 55,
                             Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
-                            Price = 2399,
-                            Title = "ПоверБанк"
+                            Image = "https://galagraffity.ru/image/cache/catalog/XML341ae4b41effce6e99b3170a951e6dc7/futbolki/IMGec5d5e1c4a114ecba74c0557231a0d43-767x767.jpg",
+                            Price = 899,
+                            Title = "Футболка"
                         },
                         new
                         {
-                            Id = new Guid("95d9c951-486d-4dbd-b318-473e86e18795"),
-                            Count = 2,
-                            Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
-                            Price = 5999,
-                            Title = "Худи"
-                        },
-                        new
-                        {
-                            Id = new Guid("2067e886-ec57-4592-93e6-03e4ef59fe35"),
-                            Count = 5,
-                            Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
-                            Price = 2399,
-                            Title = "ПоверБанк"
-                        },
-                        new
-                        {
-                            Id = new Guid("9a6204f3-498e-418f-9868-99281c9899f8"),
-                            Count = 2,
-                            Description = "Размеры S,M,L",
-                            Image = "https://printing-t-shirts.podaru.ru/assets/images/products/760/wu6200043tif1000x1000.jpg",
-                            Price = 5999,
-                            Title = "Худи"
-                        },
-                        new
-                        {
-                            Id = new Guid("6e3e1faf-4f7f-45b4-b170-2efdb25883ca"),
-                            Count = 5,
-                            Description = "10000мАч",
-                            Image = "https://sc04.alicdn.com/kf/HTB1TxHrfgoQMeJjy1Xaq6ASsFXay.jpg",
-                            Price = 2399,
-                            Title = "ПоверБанк"
+                            Id = new Guid("ae16ea54-6493-4360-b4bb-86ab94b7431c"),
+                            Count = 55,
+                            Description = "Шарф",
+                            Image = "https://bis-souvenir.ru/wp-content/uploads/2021/01/6901992-th-img.jpg",
+                            Price = 799,
+                            Title = "Шарф"
                         });
                 });
 
@@ -228,8 +228,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("deb9e453-48a8-4e45-b2df-c75dc062bc18"),
-                            CreateAt = new DateTime(2024, 1, 29, 19, 55, 9, 690, DateTimeKind.Utc).AddTicks(7121),
+                            Id = new Guid("f18e8fa6-1bb2-46c5-8e79-c8264603633c"),
+                            CreateAt = new DateTime(2024, 1, 31, 16, 7, 15, 69, DateTimeKind.Utc).AddTicks(7471),
                             OrderStatus = 0,
                             UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
                         });
@@ -261,10 +261,10 @@ namespace Shop.Microservice.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("0d30ebcf-3584-4e41-97f6-2c96a8e7a21c"),
+                            Id = new Guid("f31503f2-e602-4a5f-826e-ce128357ed1a"),
                             Count = 1,
-                            OrderId = new Guid("deb9e453-48a8-4e45-b2df-c75dc062bc18"),
-                            ProductId = new Guid("8948b2a3-a264-4cb7-8345-646e5e33ca3f")
+                            OrderId = new Guid("f18e8fa6-1bb2-46c5-8e79-c8264603633c"),
+                            ProductId = new Guid("4ff2c5a6-f9a9-40fa-ae10-525ddb3abb7b")
                         });
                 });
 

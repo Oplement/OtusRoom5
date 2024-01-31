@@ -13,6 +13,7 @@ namespace Shop.Microservice.Infrastructure.Repositories.Contracts
         Task<List<Order>> GetOrders(Guid userid);
         Task<T> Create(T item);
         Task Update(T item);
+        Task UpdatePhoto(Guid id, string path);
         Task UpdateOrderStatus (Guid id, string status);
         Task OrderCart(Guid orderid);
         Task<List<OrderProduct>> GetCart(Guid userid);

@@ -102,6 +102,14 @@ namespace Shop.Microservice.Infrastructure.Repositories.Implementation
 
             await Save();
         }
+        public async Task UpdatePhoto(Guid id, string path)
+        {
+            var product = _databaseContext.Products.FirstOrDefault(m => m.Id == id);
+            product.Image = path;
+
+
+            await Save();
+        }
         public async Task UpdateOrderStatus(Guid id, string status)
         {
             var order = _databaseContext.Orders.FirstOrDefault(m => m.Id == id);

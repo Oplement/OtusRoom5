@@ -9,4 +9,15 @@
             ProductId = productid;
         }
     }
+
+    public class UpdatePhotoModel
+    {
+        public Guid Id { get; set; }
+        public string Path { get; set; }
+        public UpdatePhotoModel(Guid id, string path)
+        {
+            Id = id;
+            Path = path;
+        }
+    }
 }

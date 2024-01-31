@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Domain.Entities;
+using System.Diagnostics;
 
 namespace ClientApp.Controllers
 {
@@ -31,28 +32,36 @@ namespace ClientApp.Controllers
         [HttpGet("AllOrdersWithDetails")]
         public async Task<IActionResult> AllOrdersWithDetails()
         {
-            // Получение всех заказов
-            string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-
-            // Отправка запроса к API для получения всех заказов
-            ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders", this.HttpContext);
-
-            // Десериализация ответа в список заказов
-            var orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
-            
-
-            // Получение пользователей
-            string authServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Authorization");
-            ResponseModel usersResponse = _requestService.SendGet(authServiceAddress, "auth/getallusers", this.HttpContext);
+       
+            var orders = new List<Order>();
             var users = new List<User>();
-            if (usersResponse.success)
+            var events = new List<ManualResetEvent>();
+
+            var resetEvent = new ManualResetEvent(false);
+            ThreadPool.QueueUserWorkItem((state) => 
             {
+                string shopServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+                ResponseModel response = _requestService.SendGet(shopServiceAddress, "api/orders", this.HttpContext);
+                orders = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Order>>(response.result.ToString());
+
+                resetEvent.Set();
+            });
+            events.Add(resetEvent);
+
+            var resetEvent2 = new ManualResetEvent(false);
+            ThreadPool.QueueUserWorkItem((state) => 
+            {
+                string authServiceAddress = MicroserviceDictionary.GetMicroserviceAdress("Authorization");
+                ResponseModel usersResponse = _requestService.SendGet(authServiceAddress, "auth/getallusers", this.HttpContext);
                 users = Newtonsoft.Json.JsonConvert.DeserializeObject<List<User>>(usersResponse.result.ToString());
-            }
 
-            // Создание списка DTO
+                resetEvent2.Set();
+            });
+            events.Add(resetEvent2);
+
+            WaitHandle.WaitAll(events.ToArray());
+
             var dict = new Dictionary<string, List<Order>>();
-
             foreach (var order in orders)
             {
                 var user = users.FirstOrDefault(u => u.Id == order.UserId);

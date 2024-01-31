@@ -36,6 +36,10 @@ namespace Shop.Microservice.Infrastructure.Services
         {
             await _repository.Update(product);
         }
+        public async Task UpdateProductPhotoAsync(Guid id, string path)
+        {
+            await _repository.UpdatePhoto(id, path);
+        }
 
         public async Task DeleteProductAsync(Guid id)
         {
