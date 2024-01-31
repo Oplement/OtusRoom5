@@ -3,6 +3,7 @@ using ClientApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Domain.Entities;
+using System.Diagnostics;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace ClientApp.Controllers
@@ -55,20 +56,38 @@ namespace ClientApp.Controllers
             var file = Request.Form.Files[0];
             string imageName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
             string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/content/products", imageName);
+
+            var events = new List<ManualResetEvent>();
+
+            var resetEvent = new ManualResetEvent(false);
+            ThreadPool.QueueUserWorkItem(async (state) => { await UpdatePhoto(prodid, imageName);  resetEvent.Set(); });
+            events.Add(resetEvent);
+
+            var resetEvent2 = new ManualResetEvent(false);
+
+            ThreadPool.QueueUserWorkItem(async (state) => { await SaveFile(savePath, file); resetEvent2.Set();  });
+            events.Add(resetEvent2);
+
+            WaitHandle.WaitAll(events.ToArray());
+
+            return Redirect("/mainpage");
+        }
+        private async Task UpdatePhoto(Guid prodid, string imageName)
+        {
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            _requestService.SendPost(
+                service,
+                $"api/products/updatePhoto",
+                new { id = prodid, path = "/content/products/" + imageName },
+                this.HttpContext);
+        }
+        private async Task SaveFile(string savePath, IFormFile file)
+        {
             using (var stream = new FileStream(savePath, FileMode.Create))
             {
                 file.CopyTo(stream);
             }
-
-            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
-
-            var respoonse = _requestService.SendPost(
-              service,
-            $"api/products/updatePhoto",
-              new { id = prodid, path = "/content/products/" + imageName},
-              this.HttpContext);
-
-            return Redirect("/mainpage");
         }
     }
 }
