@@ -128,7 +128,7 @@ namespace Authorization.Microservice.Core.Controllers
             if (person != null) return BadRequest("Пользователь с таким Email уже существует");
 
             var hash = await _service.Hash(registerData.Password);
-            person = new User() { Email = registerData.Email, PasswordHash = hash, Username = registerData.Username, Role = "user" };
+            person = new User() { Email = registerData.Email, PasswordHash = hash, Username = registerData.Username, ImagePath= "/content/avatars/35a44d12-42f9-4254-a7d3-2e3bf26c934c.jpg", Role = "user" };
 
             await _service.CreateAsync(person);
 
