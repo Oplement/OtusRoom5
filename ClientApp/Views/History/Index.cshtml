@@ -55,7 +55,7 @@
                     foreach (var product in order.OrderProducts)
                     {
                         <div class="item">
-                            <p><a href="ссылка на товар"><img src=@product.Product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
+                            <p><a href="/ProductInfo/Info/@product.Product.Id"><img src=@product.Product.Image alt="Image" style="width:180px; height:180px; left:60px; top:60px; "></a></p>
                             <div class="title_item">@product.Product.Title</div>
                             <div>@product.Count шт.</div>
                             <div class="price">Цена: @product.Product.Price</div>
