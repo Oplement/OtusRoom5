@@ -36,8 +36,62 @@
         flex-wrap: wrap;
         font-size: 1.5em;
     }
+
+    .form {
+        background-color: #ACC8FF;
+        width: 70%;
+        margin: 30px auto;
+        padding: 15px;
+        border-radius: 8px;
+        align-items: center;
+    }
+
+    .button {
+        background-color: #fcfcfc;
+        width: 12%;
+        height: 5%;
+        margin: 0px auto;
+        border-radius: 5px;
+    }
+
+    .input1, textarea {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        width: 100%;
+        height: 30px;
+        border-radius: 3px;
+    }
 </style>
 
+
+<div class="xz">
+    <form method="post" action="/createuser/create" class="form" id="form1">
+
+        <div class="form-group">
+            <label for="username" class="labels">Имя пользователя:</label>
+            <input type="text" id="username" name="username" class="input1">
+        </div>
+
+        <div class="form-group">
+            <label for="email" class="labels">Email:</label>
+            <input type="email" id="email" name="email" class="input1" >
+        </div>    
+        
+        <div class="form-group">
+            <label for="role" class="labels">Роль:</label>
+            <input type="text" id="role" name="role" class="input1">
+        </div>             
+        
+        <div class="form-group">
+            <label for="password" class="labels">Пароль:</label>
+            <input type="password" id="password" name="password" class="input1">
+        </div>
+
+        <button type="submit" class="button">Coздать</button>
+    </form>
+
+</div>
 
 <div class="users_container">
     @for (int i = 0; i < Model.Count; i++)
