@@ -97,8 +97,11 @@
         }
         document.getElementById('error').hidden = 'hidden';
 
-        var money = document.getElementById('amount').value;
-        var ost = document.getElementById('balance2').innerHTML;
+        var money = parseInt(document.getElementById('amount').value);
+        var ost = parseInt(document.getElementById('balance2').innerHTML);
+        console.log(ost);
+        console.log(money);
+
         if(money <= 0){
             document.getElementById('error').removeAttribute('hidden');
 
@@ -106,6 +109,7 @@
             return;
         }
         if(ost < money){
+            console.log('sd')
             document.getElementById('error').removeAttribute('hidden');
 
             document.getElementById('error').innerHTML = 'Сумма больше чем доступно для отправки';
