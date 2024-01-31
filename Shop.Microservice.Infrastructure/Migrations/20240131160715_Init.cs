@@ -105,8 +105,8 @@ namespace Shop.Microservice.Infrastructure.Migrations
                 columns: new[] { "Id", "Amount", "AmountForSend", "UserId" },
                 values: new object[,]
                 {
-                    { new Guid("487f7e43-9fbb-42c8-b8e7-a56ccf572bcc"), 10.0, 100.0, new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e") },
-                    { new Guid("bcd0b45e-569e-4ade-a45e-2286db67dfbd"), 20.0, 200.0, new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e") }
+                    { new Guid("487f7e43-9fbb-42c8-b8e7-a56ccf572bcc"), 10000.0, 100.0, new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e") },
+                    { new Guid("bcd0b45e-569e-4ade-a45e-2286db67dfbd"), 20000.0, 200.0, new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e") }
                 });
 
             migrationBuilder.InsertData(

@@ -45,14 +45,14 @@ namespace Shop.Microservice.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("487f7e43-9fbb-42c8-b8e7-a56ccf572bcc"),
-                            Amount = 10.0,
+                            Amount = 10000.0,
                             AmountForSend = 100.0,
                             UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a12d3e")
                         },
                         new
                         {
                             Id = new Guid("bcd0b45e-569e-4ade-a45e-2286db67dfbd"),
-                            Amount = 20.0,
+                            Amount = 20000.0,
                             AmountForSend = 200.0,
                             UserId = new Guid("a2a7dcb7-49fd-4ab9-bd00-b05d31a19d3e")
                         });
