@@ -57,6 +57,11 @@ namespace Shop.Microservice.Infrastructure.Services
         {
             await _repository.Update(order);
         }
+        public async Task UpdateOrderStatus(Guid id, string status)
+        {
+
+            await _repository.UpdateOrderStatus(id, status);
+        }
 
         public async Task DeleteOrderAsync(Guid id)
         {

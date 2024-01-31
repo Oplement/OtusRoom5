@@ -19,6 +19,15 @@ namespace ClientApp.Controllers
             _requestService = requestService;
         }
 
+        [HttpPost("updateStatus")]
+        public async Task<IActionResult> UpdateOrderStatus([FromForm] Guid orderid, [FromForm] string status)
+        {
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+            ResponseModel response = _requestService.SendPost(service, "api/orders/updatestatus", new { id = orderid, status = status }, this.HttpContext);
+
+            return Redirect("AllOrdersWithDetails");
+        }
+
         [HttpGet("AllOrdersWithDetails")]
         public async Task<IActionResult> AllOrdersWithDetails()
         {
