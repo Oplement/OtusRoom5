@@ -3,6 +3,7 @@ using ClientApp.Services;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Microservice.Domain.Common;
 using Shop.Microservice.Domain.Entities;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ClientApp.Controllers
 {
@@ -37,7 +38,7 @@ namespace ClientApp.Controllers
         {
             string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
 
-            ResponseModel response_get_all_products = _requestService.SendPost(
+            _requestService.SendPost(
                 service,
                 $"api/products/update", 
                 new {title=title, description = description, count = count, image=image, id = id, price = price},
@@ -45,6 +46,29 @@ namespace ClientApp.Controllers
 
 
             return Redirect($"Get/{id}");
+        }
+
+        [RequestFormLimits(ValueLengthLimit = int.MaxValue, MultipartBodyLengthLimit = int.MaxValue)]
+        [HttpPost("updatePhoto")]
+        public IActionResult UpdatePhoto([FromForm] Guid prodid)
+        {
+            var file = Request.Form.Files[0];
+            string imageName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+            string savePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/content/products", imageName);
+            using (var stream = new FileStream(savePath, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            string service = MicroserviceDictionary.GetMicroserviceAdress("Shop");
+
+            var respoonse = _requestService.SendPost(
+              service,
+            $"api/products/updatePhoto",
+              new { id = prodid, path = "/content/products/" + imageName},
+              this.HttpContext);
+
+            return Redirect("/mainpage");
         }
     }
 }

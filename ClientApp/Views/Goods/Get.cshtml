@@ -68,7 +68,22 @@
             }
     </style>
 </head>
+
 <body>
+    <script>
+        function submitt(el) {
+
+            console.log(el.value);
+            if (el.value.includes('.jpg') || el.value.includes('.JPG') || el.value.includes('.png') || el.value.includes('.PNG') || el.value.includes('.jpeg') || el.value.includes('.JPEG')) {
+                document.getElementById('submitError').hidden = 'hidden';
+
+                document.getElementById('form').submit();
+            }
+            else {
+                document.getElementById('submitError').removeAttribute('hidden');
+            }
+            }
+    </script>
     <div class="container">
         <div class="navigation">
             <!-- Навигация -->
@@ -96,10 +111,13 @@
                 <input hidden="hidden" id="image" name="image" value="@Model.Image"/>
 
                 <input type="submit" value="Save" />
-            </form>
-            <form method="post">
+            </form>                <label hidden="hidden" id="submitError" style="color:darkred">Доступные форматы файла: jpg, png, jpeg</label>
+
+            <form method="post" id="form" enctype="multipart/form-data" action="/goods/updatePhoto">
+                <input hidden="hidden" id="idp2" name="prodid" value="@Model.Id" />
+
                 <img src="@Model.Image" style="width:100px; height:100px;" />
-                <input type="file" id="image" name="image" />
+                <input type="file" onchange="submitt(this)" id="image" name="image" />
             </form>
         </div>
 
